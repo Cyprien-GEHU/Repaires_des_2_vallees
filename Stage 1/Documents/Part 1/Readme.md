@@ -1,11 +1,11 @@
-Projet Repaire Des 2 Vallées
+#Projet Repaire Des 2 Vallées
 
-Teams:
+##Teams:
     -Cyprien Gehu : developpeur back-end and chief of project
     -Bryan Weinegaessel : developpeur front-end
     -Communication : discord
 
-Project:
+##Project:
     introduction:
         In collaboration with the director of Repaire des 2 Vallées, our project aims to modernize the website to meet her expectations. This complete overhaul will provide better visibility and simplified access to key information. 
     Global idea:
@@ -19,7 +19,7 @@ Project:
             -Article database: CL-based articles (by leisure center (categories))
 
 
-Minimum Valiable Project:
+##Minimum Valiable Project:
     Website Creation:
         -Dynamic site display
         -User account creation
@@ -36,7 +36,7 @@ Minimum Valiable Project:
         -Target audience: parents and their children looking for activities
     
 
-Potential Problems We Might Encounter:
+##Potential Problems We Might Encounter:
     -Linking the back-end and front-end.
     -Creating roles on the website, such as user, administrator, and super-admin permissions.
     -Adjusting visibility and layout based on permissions on the website.
