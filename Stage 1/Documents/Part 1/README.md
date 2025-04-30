@@ -1,5 +1,5 @@
-# Projet Repaire Des 2 Vallées
-![favicon-16x16](https://github.com/Cyprien-GEHU/Repaires_des_2_vallees/blob/bryan/Stage%201/Documents/Part%201/favicon.ico)
+# Projet Repaire Des 2 Vallées ![favicon-16x16](https://github.com/Cyprien-GEHU/Repaires_des_2_vallees/blob/bryan/Stage%201/Documents/Part%201/favicon.ico)
+
 ## Teams:
 - Cyprien Gehu : developpeur back-end and chief of project
 - Bryan Weinegaessel : developpeur front-end
