@@ -1,36 +1,75 @@
 # Projet Repaire Des 2 Vallées ![favicon-16x16](https://github.com/Cyprien-GEHU/Repaires_des_2_vallees/blob/bryan/Stage%201/Documents/Part%201/favicon.ico)
 
-## Teams 🤝:
-- Cyprien Gehu : developpeur back-end and chief of project
-- Bryan Weinegaessel : developpeur front-end
-- Communication : discord
-
 ## 🚀 Project:
 ### 📄 Introduction:
 In collaboration with the director of Repaire des 2 Vallées, our project aims to modernize the website to meet her expectations. This complete overhaul will provide better visibility and simplified access to key information. 
 
+### 🌐 Collaborations and Strategy:
+
+- **Bryan Weinegaessel**: Responsible for the front-end development, ensuring a visually appealing and user-friendly interface.
+- **Cyprien Gehu**: Responsible for the back-end development, creating a robust system that supports the front-end.
+
+- **Strategy**:
+    - For this mission, we use:
+
+        - Discord and Slack for communication
+
+        - GitHub for version control
+
+        - On GitHub, each of us uses our personal branch
+
+        - use all command of git
+
+
 ### 📚 Global idea:
-- Creation of a dynamic website for a leisure center
-- Creation of a mobile version
-- Creation of a scoring system per center for each activity with the list of registered children
-- Creation of databases:
-    - Admin database: Activity leaders
-    - User database: Parents (pre-registration, activity search)
-    - Activity database: EVS (School Life Space) articles
-    - Article database: CL-based articles (by leisure center (categories))
+
+| Feature                              | Rating |
+|--------------------------------------|--------|
+| Website optimization                 | 5/5    |
+| Interactive display                  | 5/5    |
+| Creation of unique pages             | 5/5    |
+| Database design                      | 5/5    |
+| Login/logout module                  | 5/5    |
+| Complete article management          | 5/5    |
+| Agenda integration                   | 5/5    |
+| Introductory video                   | 5/5    |
+| Role and permission management       | 5/5    |
+| French version                       | 5/5    |
+| Contact interface                    | 5/5    |
+| Article deletion                     | 5/5    |
+| Article editing                      | 5/5    |
+| Article creation                     | 5/5    |
+| User account management              | 3/5    |
+| Pre-registration                     | 3/5    |
+| Newsletter system                    | 3/5    |
+| Photo album page                     | 3/5    |
+| Mobile compatibility                 | 2/5    |
+| Security level                       | 2/5    |
+| Time tracking system                 | 2/5    |
+| Mobile application                   | 1/5    |
+| Payment functionality                | 1/5    |
+| English version                      | 1/5    |
+| AI assistant for customer support    | 1/5    |
+
 
 
 ## ✨ Minimum Valiable Project:
 
 ### 💻 Website Creation:
-- Dynamic site display
-- User account creation
-- Implementation of a calendar system for social living spaces
-- Article creation
-- Article modification
+- Website optimization
+- Interactive display
+- Creation of unique pages
+- Database design
+- Login/logout module
+- Complete article management
+- Agenda integration
+- Introductory video
+- Role and permission management
+- French version
+- Contact interface
 - Article deletion
-- Insert a presentation video at the beginning of the site
-- French-language site
+- Article editing
+- Article creation
 
 # 👨‍👩‍👧‍👧 Project Target:
 - Optimize the current website of Repaire des 2 Vallées
@@ -42,3 +81,11 @@ In collaboration with the director of Repaire des 2 Vallées, our project aims t
 - Linking the back-end and front-end
 - Creating roles on the website, such as user, administrator, and super-admin permissions.
 - Adjusting visibility and layout based on permissions on the website.
+- Communication challenges due to the distance between peers
+- Version conflicts and inconsistencies
+- Issues related to Git and GitHub usage
+ 
+
+## Teams 🤝:
+- [Cyprien Gehu](https://github.com/Cyprien-GEHU)
+- [Bryan Weinegaessel](https://github.com/mrfouu)
