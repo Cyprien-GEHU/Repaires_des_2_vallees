@@ -23,22 +23,25 @@ In collaboration with the director of Repaire des 2 Vallées, our project aims t
 
 ### 📚 Global idea:
 
-| Feature                              | Rating |
-|--------------------------------------|--------|
-| Website optimization                 | 5/5    |
-| Interactive display                  | 5/5    |
-| Creation of unique pages             | 5/5    |
-| Database design                      | 5/5    |
-| Login/logout module                  | 5/5    |
-| Complete article management          | 5/5    |
-| Agenda integration                   | 5/5    |
-| Introductory video                   | 5/5    |
-| Role and permission management       | 5/5    |
-| French version                       | 5/5    |
-| Contact interface                    | 5/5    |
-| Article deletion                     | 5/5    |
-| Article editing                      | 5/5    |
-| Article creation                     | 5/5    |
+- **specifications**: The specifications were requested by the client, the rest are ideas proposed to improve the site
+
+
+| Feature                              | Rating | specifications |
+|--------------------------------------|--------|----------------|
+| Website optimization                 | 5/5    |       yes      |
+| Interactive display                  | 5/5    |       yes      |
+| Creation of unique pages             | 5/5    |       yes      |
+| Database design                      | 5/5    |       no       |
+| Login/logout module                  | 5/5    |       no       |
+| Complete article management          | 5/5    |       no       |
+| Agenda integration                   | 5/5    |       yes      |
+| Introductory video                   | 5/5    |       yes      |
+| Role and permission management       | 5/5    |       no       |
+| French version                       | 5/5    |       yes      |
+| Contact interface                    | 5/5    |       yes      |
+| Article deletion                     | 5/5    |       no       |
+| Article editing                      | 5/5    |       no       |
+| Article creation                     | 5/5    |       no       |
 | User account management              | 3/5    |
 | Pre-registration                     | 3/5    |
 | Newsletter system                    | 3/5    |
