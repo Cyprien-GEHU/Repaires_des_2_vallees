@@ -70,8 +70,7 @@ This project is essential as we are working for an association named *Repaire de
 - Team Formation  
 - Research and Brainstorming  
 - Idea Evaluation  
-- Decision and Refinement  
-- Documentation of the Project Charter  
+- Decision and Refinement 
 </details>
 
 <details>
