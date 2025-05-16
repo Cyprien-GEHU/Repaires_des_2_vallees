@@ -1,4 +1,4 @@
-### Project Charter - Repaire des 2 Vallées [favicon-16x16](https://github.com/Cyprien-GEHU/Repaires_des_2_vallees/blob/bryan/Stage%201/Documents/Part%201/favicon.ico)
+### Project Charter - Repaire des 2 Vallées ![favicon-16x16](https://github.com/Cyprien-GEHU/Repaires_des_2_vallees/blob/bryan/Stage%201/Documents/Part%201/favicon.ico)
 
 # Project Overview
 
@@ -50,6 +50,7 @@ This project is essential as we are working for an association named *Repaire de
 | 🛠️ Hosting reset risk                         | Hosting may reset due to connection errors between the back-end and front-end.             | High         | Schedule automatic backups and regularly test hosting stability.                                   |
 | 📢 Communication issues between project parts | Poor communication or coordination between project teams or stakeholders.                  | Medium-High  | Set up regular check-ins and use centralized collaborative tools.                                  |
 | 💻 Machine breakdown                          | Our machines could break down, interrupting progress despite our efforts.                  | Minor        | Use backup machines and store code on GitHub to ensure no progress is lost.                        |
+| 🧍change of mind or a last-minute request from the customer | The client may change their mind or request changes at the last minute. | Medium-High  | Ensure the client is fully involved in the project from the beginning and provide clear communication. |
 
 ---
 
@@ -63,12 +64,51 @@ This project is essential as we are working for an association named *Repaire de
 | 🕓 Week 7-10  | 4               | MVP Development                | 🕔 Pending      |
 | 🕔 Week 11-12 | 5               | Project Closure                | 🕕 Pending      |
 
-### MVP Development Timeline 📅
+<details>
+<summary>🌟 Week 1-2: Idea Development</summary>
 
-| **Phase** | **Task**                              | **Duration** |
-|-----------|---------------------------------------|--------------|
-| 1️⃣ Phase 1   | Create the first version of the website | 1 week       |
-| 2️⃣ Phase 2   | Create the first database for the website | 2 days       |
-| 3️⃣ Phase 3   | Create the first version of the API   | 3 days       |
+- Team Formation  
+- Research and Brainstorming  
+- Idea Evaluation  
+- Decision and Refinement  
+- Documentation of the Project Charter  
+</details>
+
+<details>
+<summary>📝 Week 3-4: Project Charter Development</summary>
+
+- Documentation  
+- Project Objectives  
+- Scope  
+- Stakeholders and Roles  
+- Risks  
+- High-Level Plan  
+</details>
+
+<details>
+<summary>💻 Week 5-6: Technical Documentation</summary>
+
+- Technologies Used  
+- Project Features  
+- Architecture Diagram  
+- Maintenance and Scalability  
+</details>
+
+<details>
+<summary>🚀 Week 7-10: MVP Development</summary>
+
+- Front-End Development  
+- Back-End Development  
+- First version deployment  
+</details>
+
+<details>
+<summary>✅ Week 11-12: Project Closure</summary>
+
+- Documentation  
+- Testing  
+- Deployment  
+- Maintenance  
+</details>
 
 ---
