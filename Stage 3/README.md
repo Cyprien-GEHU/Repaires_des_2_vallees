@@ -267,12 +267,25 @@ sequenceDiagram
 
 ### **Admin APIs**
 
-| **URL**                           | **Method** | **Input** (JSON)                                 | **Output** (JSON)                 | **Description**   |
-| --------------------------------- | ---------- | ------------------------------------------------ | --------------------------------- | ----------------- |
-| `/api/admin/user`                 | GET        | None                                             | `{ users: [...] }`                | View all users    |
-| `/api/admin/article`              | POST       | `{ title, description, date, image (optional) }` | `{ message: "Article created!" }` | Create an article |
-| `/api/admin/article/{id_article}` | PUT        | `{ title, description, date, image (optional) }` | `{ message: "Article updated!" }` | Update an article |
-| `/api/admin/article/{id_article}` | DELETE     | `{ id_article }`                                 | `{ message: "Article deleted!" }` | Delete an article |
+### **Host and admin part**
+
+| **URL**  | **Method**      | **input** (json)                 | **Output** (json)  | description|
+|------------|-----------------|---------------------------------|--------------|------------|
+|api/admin/user|GET||``{list of user}``| Admin see all user |
+|api/admin/user/{id_user}|GET|``{id_user}``|``{User info}``| Admin see one user with this id|
+|api/admin/user/{id_user}|PUT|``{firsname, lastName, email, adress, phone, id_user, id_admin}``| ``{message: "the user info have been modified"}``| admin modified the user data |
+|api/admin/user/{id_user}|DELETE|``{id_user}``|``{message: "the acount user are delete"}``| Admin delete the user acount|
+|api/admin/article| POST |``{titre, description, date, image (optionnal)}``|``{message: "Your article are create !"}``| Admin create a article |
+|api/admin/article/{id_article} |PUT|``{titre, description, date, image (optionnal)}``|``{message: "Your article are update !"}``|Admin modified the article |
+|api/admin/article/{id_article} |DELETE|``{id_article}``|``{message: "Your article are delete!"}``|  Admin delete the article|
+|api/admin/agenda |POST|``{titre, description, date, picture (optionnal)}``|``{message: "Your activity are create !"}``| Admin create a activity on agenda |
+|api/admin/agenda/{id_agenda} |PUT|``{id_agenda, titre, description, date, image (optionnal)}``|``{message: "Your activity are update !"}``|Admin modified the activity agenda |
+|api/admin/agenda/{id_agenda} |DELETE|``{id_agenda}``|``{message: "Your activity are delete !"}``|  Admin delete activity on the agenda|
+|api/event |GET||``{list of event}``| Get all event |
+|api/event/{id_event} |GET|``{id_event}``|``{title, description, date, image}``| Get a event with this id |
+|api/admin/event |POST|``{titre, description, date, image (optionnal)}``|``{message: "Your event are create !"}``| Admin create a event |
+|api/admin/event/{id_event} |PUT|``{id_agenda, titre, description, date, image (optionnal)}``|``{message: "Your event are update !"}``|Admin modified the event |
+|api/admin/event/{id_event} |DELETE|``{id_agenda}``|``{message: "Your event are delete !"}``|  Admin delete the event|
 
 ---
 
