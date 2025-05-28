@@ -10,45 +10,203 @@ database: mangoDb
 api external : Ionos
 
 ## Components, Classes, and Database Design
-Class :
-- article
-- agenda
 database :
-- Admin : nom, prenom, mail, PhoneNumber, rule, password, id_admin
-- User: nom, prenom, rule, mail, adress, password, PhoneNumber, id_User
-- Agenda: titre, description, day, image (optionnal), prix, id_agenda
-- Article : titre, description, date, image (optionnal), creator, id_Article
+- Admin : firstName, LastName, mail, PhoneNumber, rule, password, id_admin, creat at, update at
+- User: nom, prenom, rule, mail, adress, password, PhoneNumber, id_User, creat at, update at
+- Agenda: titre, description, day, image (optionnal), prix, id_agenda, creat at, update at, createby
+- Article : titre, description, date, image (optionnal), creator, id_Article, creat at, update at, createby, category
+- children: firstName, LastName, age
+- event : title, date, creat at, update at, image, id_event
 
 ## High-Level Sequence Diagrams
 
+### User diagram
+
+``` mermaid
+sequenceDiagram
+    actor User
+    participant Ionos
+    participant MongoDB
+
+    User->>Ionos: Fetch all article
+    Ionos->>MongoDB: GET /article
+    MongoDB-->>Ionos: Return port 200
+    Ionos-->>User: List of all article
+
+    User->>Ionos: Get one article 
+    Ionos->>MongoDB: GET /article/{id_article}
+    alt article found
+    MongoDB-->>Ionos: Return port 200
+    Ionos-->>User: Article found
+    else article not found
+    MongoDB-->>Ionos: Return port 404
+    Ionos-->>User: Article not found
+    end
+
+    User->>Ionos: Modify user account info
+    Ionos->>MongoDB: PUT /user/{user_id}
+    alt User
+    MongoDB-->>Ionos: Return port 200
+    Ionos-->>User: Article found
+    else another user
+    MongoDB-->>Ionos: Return port 401
+    Ionos-->>User: Unauthorized action 
+    end
+
+    User->>Ionos: User update this account
+    Ionos->>MongoDB: PUT /user/{id_user}
+    alt User
+    MongoDB-->>Ionos: Return port 200
+    Ionos-->>User: Account update
+    else another user
+    MongoDB-->>Ionos: Return port 401
+    Ionos-->>User: Unauthorized action 
+    end
+```
+
+### Host diagram
+```mermaid 
+sequenceDiagram
+    actor Host
+    participant Ionos
+    participant MongoDB
+
+    Host->>Ionos: Fetch all user
+    Ionos->>MongoDB: GET /user
+    MongoDB-->>Ionos: Return port 200
+    Ionos-->>Host: List of all user
+
+    Host->>Ionos: Create a article
+    Ionos->>MongoDB: POST /article
+    alt article have all info
+    MongoDB-->>Ionos: Return port 201
+    Ionos-->>Host: Article created !
+    else article don't have all info
+    MongoDB-->>Ionos: Return port 400
+    Ionos-->>Host: Bad request
+    end
+
+    Host->>Ionos: Modify a article
+    Ionos->>MongoDB: PUT /article/{id_article}
+    alt host
+    MongoDB-->>Ionos: Return port 200
+    Ionos-->>Host: Article has modified
+    else another host
+    MongoDB-->>Ionos: Return port 401
+    Ionos-->>Host: Unauthorized action 
+    end
+
+    host->>Ionos: create a activity in agenda
+    Ionos->>MongoDB: POST /agenda
+    alt article have all info
+    MongoDB-->>Ionos: Return port 200
+    Ionos-->>host: Article created !
+    else article don't have all info
+    MongoDB-->>Ionos: Return port 400
+    Ionos-->>host: Bad request
+    end
+
+    Host->>Ionos: Modify activity on agenda
+    Ionos->>MongoDB: PUT /article/{id_article}
+    alt host
+    MongoDB-->>Ionos: Return port 200
+    Ionos-->>Host: activity has modified
+    else another host
+    MongoDB-->>Ionos: Return port 401
+    Ionos-->>Host: Unauthorized action 
+    end
+```
+
+### Admin part
+
+``` Mermaid
+sequenceDiagram
+    actor Admin
+    participant Ionos
+    participant MongoDB
+
+    Admin->>Ionos: Create article
+    Ionos->>MongoDB: POST /article
+    MongoDB-->>Ionos: Return port 201
+    Ionos-->>Admin: Article create!
+
+    Admin->>Ionos: Modify article
+    Ionos->>MongoDB: PUT /article/{id_article}
+    MongoDB-->>Ionos: Return port 200
+    Ionos-->>Admin: Article modified!
+
+    Admin->>Ionos: Delete article
+    Ionos->>MongoDB: DELETE /article/{id_article}
+    MongoDB-->>Ionos: Return port 200
+    Ionos-->>Admin: Article delete!
+
+    Admin->>Ionos: Add activity on agenda
+    Ionos->>MongoDB: POST /agenda
+    MongoDB-->>Ionos: Return port 201
+    Ionos-->>Admin: New activity create!
+
+    Admin->>Ionos: Modify activity on agenda
+    Ionos->>MongoDB: PUT /agenda/{id_agenda}
+    MongoDB-->>Ionos: Return port 200
+    Ionos-->>Admin: Activity modified!
+
+    Admin->>Ionos: Delete article
+    Ionos->>MongoDB: DELETE /agenda/{id_agenda}
+    MongoDB-->>Ionos: Return port 200
+    Ionos-->>Admin: Agenda delete!
+
+    Admin->>Ionos: Add new event
+    Ionos->>MongoDB: POST /event
+    MongoDB-->>Ionos: Return port 201
+    Ionos-->>Admin: New event create!
+
+    Admin->>Ionos: Modify event
+    Ionos->>MongoDB: PUT /event/{id_event}
+    MongoDB-->>Ionos: Return port 200
+    Ionos-->>Admin: Event modified!
+
+    Admin->>Ionos: Delete event
+    Ionos->>MongoDB: DELETE /event/{id_event}
+    MongoDB-->>Ionos: Return port 200
+    Ionos-->>Admin: Event delete!
+```
 
 ## Document External and Internal APIs
 
 ### **User part**
 
-| **URL**  | **Method**      | **input** (json)                 | **Output** (json or message)  | 
-|------------|-----------------|---------------------------------|--------------|
-|api/user/signin|POST|``{FirstName, LastName, numero, adress, Password}``|"Your acount are created!"|
-|api/user/login | GET | ``{Email, Password}``|``{token}``|
-|api/user/parameter|PUT|``{FirstName, LastName, numero, adress, Password, id}``|"Your information have been modified"|
-|api/user/Delete|DELETE|``{id_user}``|"your acount are been delete"|
-|api/article| GET ||``{list of article}``|
-|api/article/:id |GET|``{id_Article}``|``{title, description, date, image}``|
-|api/agenda |GET||``{list of article}``|
-|api/agenda:id |GET|``{id_Agenda}``|``{title, description, date, image}``|
+| **URL**  | **Method**      | **input** (json)                 | **Output** (json)  | Description|
+|------------|-----------------|---------------------------------|--------------|------------|
+|api/user|POST|``{FirstName, LastName, numero, adress, Password}``|``{message: "Your acount are created!"}``| Creation of a user|
+|api/auth/login | GET | ``{Email, Password}``|``{token}``| connection user acount|
+|api/user/{id_user}|PUT|``{FirstName, LastName, numero, adress, Password, id}``|``{message: ""Your information have been modified"}``| Modify user account|
+|api/user/{id_user}|DELETE|``{id_user}``|``{message: "your acount are been delete"}``| Delete the user acount |
+|api/article| GET ||``{list of article}``| Get all article |
+|api/article/{id_article} |GET|``{id_Article}``|``{article}``|  Get a article with this id |
+|api/agenda |GET||``{list of article}``| Get all activity on agenda |
+|api/agenda/{id_agenda} |GET|``{id_Agenda}``|``{activity}``| Get activy on agenda with this id |
+|api/event |GET||``{list of event}``| Get all event |
+|api/event/{id_event} |GET|``{id_event}``|``{event}``| Get a event with this id |
 
-### **admin part**
+### **Host and admin part**
 
-| **URL**  | **Method**      | **input** (json)                 | **Output** (json or message)  | 
-|------------|-----------------|---------------------------------|--------------|
-|api/admin/user/parameter|PUT|``{FirstName, LastName, numero, adress, Password, id_User, id_admin}``|"the user info have been modified"|
-|api/admin/user/parameter|DELETE|``{id_user}``|"the acount user are delete"|
-|api/admin/article| POST |``{titre, description, date, image (optionnal)}``|"Your article are create !"|
-|api/admin/article:id |PUT|``{titre, description, date, image (optionnal)}``|" The article are update !"|
-|api/admin/article/:id |DELETE|``{id_Article}``|"the article has deleted"|
-|api/admin/agenda |POST|``{titre, description, date, image (optionnal)}``|"Your agenda are create !"|
-|api/admin/agenda:id |PUT|``{id_Agenda, titre, description, date, image (optionnal)}``|" The agenda are update !"|
-|api/admin/agenda:id |DELETE|``{id_Agenda}``|" The agenda are delete !"|
+| **URL**  | **Method**      | **input** (json)                 | **Output** (json)  | description|
+|------------|-----------------|---------------------------------|--------------|------------|
+|api/admin/user|GET||``{list of user}``| Admin see all user |
+|api/admin/user/{id_user}|GET|``{id_user}``|``{User info}``| Admin see one user with this id|
+|api/admin/user/{id_user}|PUT|``{FirstName, LastName, numero, adress, Password, id_User, id_admin}``| ``{message: "the user info have been modified"}``| admin modified the user data |
+|api/admin/user/{id_user}|DELETE|``{id_user}``|``{message: "the acount user are delete"}``| Admin delete the user acount|
+|api/admin/article| POST |``{titre, description, date, image (optionnal)}``|``{message: "Your article are create !"}``| Admin create a article |
+|api/admin/article/{id_article} |PUT|``{titre, description, date, image (optionnal)}``|``{message: "Your article are update !"}``|Admin modified the article |
+|api/admin/article/{id_article} |DELETE|``{id_Article}``|``{message: "Your article are delete!"}``|  Admin delete the article|
+|api/admin/agenda |POST|``{titre, description, date, image (optionnal)}``|``{message: "Your activity are create !"}``| Admin create a activity on agenda |
+|api/admin/agenda/{id_agenda} |PUT|``{id_Agenda, titre, description, date, image (optionnal)}``|``{message: "Your activity are update !"}``|Admin modified the activity agenda |
+|api/admin/agenda/{id_agenda} |DELETE|``{id_Agenda}``|``{message: "Your activity are delete !"}``|  Admin delete activity on the agenda|
+|api/event |GET||``{list of event}``| Get all event |
+|api/event/{id_event} |GET|``{id_event}``|``{title, description, date, image}``| Get a event with this id |
+|api/admin/event |POST|``{titre, description, date, image (optionnal)}``|``{message: "Your event are create !"}``| Admin create a event |
+|api/admin/event/{id_event} |PUT|``{id_Agenda, titre, description, date, image (optionnal)}``|``{message: "Your event are update !"}``|Admin modified the event |
+|api/admin/event/{id_event} |DELETE|``{id_Agenda}``|``{message: "Your event are delete !"}``|  Admin delete the event|
 
 
 ## Plan SCM and QA Strategies
