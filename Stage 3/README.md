@@ -1,4 +1,4 @@
-### Technical Documentation - Repaire des 2 Vallées [favicon-16x16](https://github.com/Cyprien-GEHU/Repaires_des_2_vallees/blob/bryan/Stage%201/Documents/Part%201/favicon.ico)
+### Technical Documentation - Repaire des 2 Vallées ![favicon-16x16](https://github.com/Cyprien-GEHU/Repaires_des_2_vallees/blob/bryan/Stage%201/Documents/Part%201/favicon.ico)
 
 ## User Stories and Mockups
 
@@ -47,11 +47,16 @@ As a user, I want an AI assistant to help clients so that it can assist them if 
 
 Écran de connexion/inscription
 
-Aperçu du tableau de bord
+![Ecran de connexion/inscription](images/logininscriptions.png)
+
+Aperçu de la page des arcticles:
+
+![Aperçu de la page des arcticles](images/Articles.png)
 
 Formulaire de création de tâche
 
-Centre de notifications
+![Formulaire de création de tâche](images/formulaire.png)
+
 
 ## Design System Architecture
 
