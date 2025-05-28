@@ -1,256 +1,223 @@
 ### Technical Documentation - Repaire des 2 Vallées ![favicon-16x16](https://github.com/Cyprien-GEHU/Repaires_des_2_vallees/blob/bryan/Stage%201/Documents/Part%201/favicon.ico)
 
-# User Stories and Mockups 📖  
+---
 
-## Prioritized User Stories 🚀  
+# User Stories and Mockups 📚
 
-- **Must Have ✅**  
-    - **User Story** :  
-        - 👤 As a user, I want to sign up and log in so that I can securely access my account.  
-        - 📰 As a user, I want to browse the association's articles so that I can stay informed, sign up, and log in.  
-        - 📆 As a user, I want to see which activities/articles I am enrolled in so that I know when to attend.  
-        - 🔔 As a user, I want to receive notifications for activity/article deadlines so that I never miss anything.  
+## Prioritized User Stories 🚀
 
-- **Should Have 💡**  
-    - **User Story** :  
-        - 👨‍💻 As an administrator, I want to manage the association's articles so that I can edit or delete them if necessary.  
-        - 🤝 As a user, I want to collaborate with others by sharing projects so that we can work efficiently together.  
-        - 🗓️ As a user, I want to integrate my calendar with the application so that I can synchronize my tasks across platforms.  
-        - 🎨 As a user, I want to customize my profile so that I can make my experience more personal.  
+### **Must Have** ✅
 
-- **Could Have 🌟**  
-    - **User Story** :  
-        - 🌙 As a user, I want a dark mode so that I can use the application comfortably in low-light environments.  
+* **User Stories**:
 
-- **Won’t Have (Excluded from MVP) ❌**  
-    - **User Story** :  
-        - 🎙️ As a user, I want to use voice commands to find an activity so that I can search without using the keyboard.  
-        - 🤖 As a user, I want an AI assistant to help clients so that it can assist them if they encounter problems on the site.  
+  * 👤 *As a user, I want to sign up and log in so that I can securely access my account.*
+  * 📰 *As a user, I want to browse the association's articles so that I can stay informed.*
+  * 📅 *As a user, I want to see which activities/articles I am enrolled in so that I know when to attend.*
+  * 🔔 *As a user, I want to receive notifications for activity/article deadlines so that I never miss anything.*
 
-# Main Screen Mockups 🎨  
-## For the user interface, here are the key screen mockups:  
+### **Should Have** 💡
 
-### 🏠 Home Screen:  
-![Home Screen](images/Messenger_creation_201D34D1-0827-4A20-98E3-27BFC08A5AC9.jpg)  
+* **User Stories**:
 
-### 🔐 Login/Sign-Up Screen:  
-![Login/Sign-Up Screen](images/logininscriptions.png)  
+  * 💻 *As an administrator, I want to manage the association's articles so that I can edit or delete them if necessary.*
+  * 🧑‍🔧 *As a user, I want to collaborate with others by sharing projects so that we can work efficiently together.*
+  * 🕗 *As a user, I want to integrate my calendar with the application so that I can synchronize my tasks across platforms.*
+  * 🎨 *As a user, I want to customize my profile so that I can make my experience more personal.*
 
-### 📄 Articles Page Preview:  
-![Articles Page Preview](images/Articles.png)  
+### **Could Have** 🌟
+
+* **User Stories**:
+
+  * 🌃 *As a user, I want a dark mode so that I can use the application comfortably in low-light environments.*
+
+### **Won’t Have (Excluded from MVP)** ❌
+
+* **User Stories**:
+
+  * 🎤 *As a user, I want to use voice commands to find an activity so that I can search without using the keyboard.*
+  * 🤖 *As a user, I want an AI assistant to help clients so that it can assist them if they encounter problems on the site.*
 
 ---
 
-## Design System Architecture 🎨 
+## Main Screen Mockups 🎨
 
-front-end : HTML, CSS
-back-end : node.js and express
-database: mangoDb
-api external : Ionos
+### 🏠 Home Screen
 
-## Components, Classes, and Database Design 📊  
+![Home Screen](images/Messenger_creation_201D34D1-0827-4A20-98E3-27BFC08A5AC9.jpg)
 
-database :
-- Admin : firstName, LastName, mail, PhoneNumber, rule, password, id_admin, creat at, update at
-- User: nom, prenom, rule, mail, adress, password, PhoneNumber, id_User, creat at, update at
-- Agenda: titre, description, day, image (optionnal), prix, id_agenda, creat at, update at, createby
-- Article : titre, description, date, image (optionnal), creator, id_Article, creat at, update at, createby, category
-- children: firstName, LastName, age
-- event : title, date, creat at, update at, image, id_event
+### 🔐 Login/Sign-Up Screen
 
+![Login/Sign-Up Screen](images/logininscriptions.png)
 
-## High-Level Sequence Diagrams 📈  
+### 📜 Articles Page Preview
 
-### User diagram
+![Articles Page Preview](images/Articles.png)
 
-``` mermaid
+---
+
+# Design System Architecture 🖌️
+
+* **Frontend**: HTML, CSS
+* **Backend**: Node.js, Express
+* **Database**: MongoDB
+* **External APIs**: Ionos
+
+---
+
+# Components, Classes, and Database Design 📊
+
+### **Database Schema**:
+
+* **Admin**:
+
+  * `firstName`, `lastName`, `email`, `phoneNumber`, `role`, `password`, `id_admin`, `created_at`, `updated_at`
+* **User**:
+
+  * `firstName`, `lastName`, `role`, `email`, `address`, `password`, `phoneNumber`, `id_user`, `created_at`, `updated_at`
+* **Agenda**:
+
+  * `title`, `description`, `day`, `image` (optional), `price`, `id_agenda`, `created_at`, `updated_at`, `created_by`
+* **Article**:
+
+  * `title`, `description`, `date`, `image` (optional), `creator`, `id_article`, `created_at`, `updated_at`, `created_by`, `category`
+* **Children**:
+
+  * `firstName`, `lastName`, `age`
+* **Event**:
+
+  * `title`, `date`, `created_at`, `updated_at`, `image`, `id_event`
+
+---
+
+# High-Level Sequence Diagrams 📊
+
+### **User Interaction**
+
+```mermaid
 sequenceDiagram
     actor User
     participant Ionos
     participant MongoDB
 
-    User->>Ionos: Fetch all article
-    Ionos->>MongoDB: GET /article
-    MongoDB-->>Ionos: Return port 200
-    Ionos-->>User: List of all article
+    User->>Ionos: Fetch all articles
+    Ionos->>MongoDB: GET /articles
+    MongoDB-->>Ionos: Return status 200
+    Ionos-->>User: List of all articles
 
-    User->>Ionos: Get one article 
-    Ionos->>MongoDB: GET /article/{id_article}
-    alt article found
-    MongoDB-->>Ionos: Return port 200
-    Ionos-->>User: Article found
-    else article not found
-    MongoDB-->>Ionos: Return port 404
+    User->>Ionos: Get one article
+    Ionos->>MongoDB: GET /articles/{id_article}
+    alt Article Found
+    MongoDB-->>Ionos: Return status 200
+    Ionos-->>User: Article details
+    else Article Not Found
+    MongoDB-->>Ionos: Return status 404
     Ionos-->>User: Article not found
     end
 
-    User->>Ionos: Modify user account info
+    User->>Ionos: Modify account information
     Ionos->>MongoDB: PUT /user/{user_id}
-    alt User
-    MongoDB-->>Ionos: Return port 200
-    Ionos-->>User: Article found
-    else another user
-    MongoDB-->>Ionos: Return port 401
-    Ionos-->>User: Unauthorized action 
-    end
-
-    User->>Ionos: User update this account
-    Ionos->>MongoDB: PUT /user/{id_user}
-    alt User
-    MongoDB-->>Ionos: Return port 200
-    Ionos-->>User: Account update
-    else another user
-    MongoDB-->>Ionos: Return port 401
-    Ionos-->>User: Unauthorized action 
+    alt Authorized User
+    MongoDB-->>Ionos: Return status 200
+    Ionos-->>User: Account updated
+    else Unauthorized User
+    MongoDB-->>Ionos: Return status 401
+    Ionos-->>User: Unauthorized action
     end
 ```
 
-### Host diagram
-```mermaid 
+### **Host Interaction**
+
+```mermaid
 sequenceDiagram
     actor Host
     participant Ionos
     participant MongoDB
 
-    Host->>Ionos: Fetch all user
-    Ionos->>MongoDB: GET /user
-    MongoDB-->>Ionos: Return port 200
-    Ionos-->>Host: List of all user
+    Host->>Ionos: Fetch all users
+    Ionos->>MongoDB: GET /users
+    MongoDB-->>Ionos: Return status 200
+    Ionos-->>Host: List of all users
 
-    Host->>Ionos: Create a article
-    Ionos->>MongoDB: POST /article
-    alt article have all info
-    MongoDB-->>Ionos: Return port 201
-    Ionos-->>Host: Article created !
-    else article don't have all info
-    MongoDB-->>Ionos: Return port 400
+    Host->>Ionos: Create an article
+    Ionos->>MongoDB: POST /articles
+    alt Valid Request
+    MongoDB-->>Ionos: Return status 201
+    Ionos-->>Host: Article created!
+    else Invalid Request
+    MongoDB-->>Ionos: Return status 400
     Ionos-->>Host: Bad request
     end
 
-    Host->>Ionos: Modify a article
-    Ionos->>MongoDB: PUT /article/{id_article}
-    alt host
-    MongoDB-->>Ionos: Return port 200
-    Ionos-->>Host: Article has modified
-    else another host
-    MongoDB-->>Ionos: Return port 401
-    Ionos-->>Host: Unauthorized action 
-    end
-
-    host->>Ionos: create a activity in agenda
-    Ionos->>MongoDB: POST /agenda
-    alt article have all info
-    MongoDB-->>Ionos: Return port 200
-    Ionos-->>host: Article created !
-    else article don't have all info
-    MongoDB-->>Ionos: Return port 400
-    Ionos-->>host: Bad request
-    end
-
-    Host->>Ionos: Modify activity on agenda
-    Ionos->>MongoDB: PUT /article/{id_article}
-    alt host
-    MongoDB-->>Ionos: Return port 200
-    Ionos-->>Host: activity has modified
-    else another host
-    MongoDB-->>Ionos: Return port 401
-    Ionos-->>Host: Unauthorized action 
+    Host->>Ionos: Modify an article
+    Ionos->>MongoDB: PUT /articles/{id_article}
+    alt Authorized Host
+    MongoDB-->>Ionos: Return status 200
+    Ionos-->>Host: Article updated
+    else Unauthorized Host
+    MongoDB-->>Ionos: Return status 401
+    Ionos-->>Host: Unauthorized action
     end
 ```
 
-### Admin part
+---
 
-``` mermaid
-sequenceDiagram
-    actor Admin
-    participant Ionos
-    participant MongoDB
+# Document External and Internal APIs 🔗
 
-    Admin->>Ionos: Create article
-    Ionos->>MongoDB: POST /article
-    MongoDB-->>Ionos: Return port 201
-    Ionos-->>Admin: Article create!
+### **User APIs**
 
-    Admin->>Ionos: Modify article
-    Ionos->>MongoDB: PUT /article/{id_article}
-    MongoDB-->>Ionos: Return port 200
-    Ionos-->>Admin: Article modified!
+| **URL**               | **Method** | **Input** (JSON)                                        | **Output** (JSON)                               | **Description**     |
+| --------------------- | ---------- | ------------------------------------------------------- | ----------------------------------------------- | ------------------- |
+| `/api/user`           | POST       | `{ firstName, lastName, email, phoneNumber, password }` | `{ message: "Your account is created!" }`       | Create a new user   |
+| `/api/auth/login`     | GET        | `{ email, password }`                                   | `{ token }`                                     | User login          |
+| `/api/user/{id_user}` | PUT        | `{ firstName, lastName, email, phoneNumber, password }` | `{ message: "Your account has been updated." }` | Update user account |
+| `/api/user/{id_user}` | DELETE     | `{ id_user }`                                           | `{ message: "Your account has been deleted." }` | Delete user account |
+| `/api/articles`       | GET        | None                                                    | `{ articles: [...] }`                           | Get all articles    |
 
-    Admin->>Ionos: Delete article
-    Ionos->>MongoDB: DELETE /article/{id_article}
-    MongoDB-->>Ionos: Return port 200
-    Ionos-->>Admin: Article delete!
+### **Admin APIs**
 
-    Admin->>Ionos: Add activity on agenda
-    Ionos->>MongoDB: POST /agenda
-    MongoDB-->>Ionos: Return port 201
-    Ionos-->>Admin: New activity create!
+| **URL**                           | **Method** | **Input** (JSON)                                 | **Output** (JSON)                 | **Description**   |
+| --------------------------------- | ---------- | ------------------------------------------------ | --------------------------------- | ----------------- |
+| `/api/admin/user`                 | GET        | None                                             | `{ users: [...] }`                | View all users    |
+| `/api/admin/article`              | POST       | `{ title, description, date, image (optional) }` | `{ message: "Article created!" }` | Create an article |
+| `/api/admin/article/{id_article}` | PUT        | `{ title, description, date, image (optional) }` | `{ message: "Article updated!" }` | Update an article |
+| `/api/admin/article/{id_article}` | DELETE     | `{ id_article }`                                 | `{ message: "Article deleted!" }` | Delete an article |
 
-    Admin->>Ionos: Modify activity on agenda
-    Ionos->>MongoDB: PUT /agenda/{id_agenda}
-    MongoDB-->>Ionos: Return port 200
-    Ionos-->>Admin: Activity modified!
+---
 
-    Admin->>Ionos: Delete article
-    Ionos->>MongoDB: DELETE /agenda/{id_agenda}
-    MongoDB-->>Ionos: Return port 200
-    Ionos-->>Admin: Agenda delete!
+# Plan SCM and QA Strategies 🛠️
 
-    Admin->>Ionos: Add new event
-    Ionos->>MongoDB: POST /event
-    MongoDB-->>Ionos: Return port 201
-    Ionos-->>Admin: New event create!
+### **SCM Strategy**
 
-    Admin->>Ionos: Modify event
-    Ionos->>MongoDB: PUT /event/{id_event}
-    MongoDB-->>Ionos: Return port 200
-    Ionos-->>Admin: Event modified!
+* **Version Control**: Git
+* **Branching Strategy**:
 
-    Admin->>Ionos: Delete event
-    Ionos->>MongoDB: DELETE /event/{id_event}
-    MongoDB-->>Ionos: Return port 200
-    Ionos-->>Admin: Event delete!
-```
+  * `main`: Stable, production-ready code
+  * `development`: Integration branch for features/bug fixes
+  * `feature/*`: Feature branches for individual tasks
+  * `hotfix/*`: For urgent fixes
+* **Commit Guidelines**: Use a standardized format, e.g., `feat: Add feature` or `fix: Correct issue`
 
-## Document External and Internal APIs 🔗
+### **Quality Assurance**
 
-### **User part**
+* **Testing Types**:
 
-| **URL**  | **Method**      | **input** (json)                 | **Output** (json)  | Description|
-|------------|-----------------|---------------------------------|--------------|------------|
-|api/user|POST|``{FirstName, LastName, numero, adress, Password}``|``{message: "Your acount are created!"}``| Creation of a user|
-|api/auth/login | GET | ``{Email, Password}``|``{token}``| connection user acount|
-|api/user/{id_user}|PUT|``{FirstName, LastName, numero, adress, Password, id}``|``{message: ""Your information have been modified"}``| Modify user account|
-|api/user/{id_user}|DELETE|``{id_user}``|``{message: "your acount are been delete"}``| Delete the user acount |
-|api/article| GET ||``{list of article}``| Get all article |
-|api/article/{id_article} |GET|``{id_Article}``|``{article}``|  Get a article with this id |
-|api/agenda |GET||``{list of article}``| Get all activity on agenda |
-|api/agenda/{id_agenda} |GET|``{id_Agenda}``|``{activity}``| Get activy on agenda with this id |
-|api/event |GET||``{list of event}``| Get all event |
-|api/event/{id_event} |GET|``{id_event}``|``{event}``| Get a event with this id |
+  * Unit Tests: Individual components (e.g., API endpoints)
+  * Integration Tests: Modules working together
+  * End-to-End Tests: User workflows
+  * Manual Tests: Critical user flows/UI validation
+* **Tools**:
 
-### **Host and admin part**
+  * W3C: HTML/CSS validation
+  * Mocha: Backend testing
+  * ESLint: Node.js linting
+* **Environments**:
 
-| **URL**  | **Method**      | **input** (json)                 | **Output** (json)  | description|
-|------------|-----------------|---------------------------------|--------------|------------|
-|api/admin/user|GET||``{list of user}``| Admin see all user |
-|api/admin/user/{id_user}|GET|``{id_user}``|``{User info}``| Admin see one user with this id|
-|api/admin/user/{id_user}|PUT|``{FirstName, LastName, numero, adress, Password, id_User, id_admin}``| ``{message: "the user info have been modified"}``| admin modified the user data |
-|api/admin/user/{id_user}|DELETE|``{id_user}``|``{message: "the acount user are delete"}``| Admin delete the user acount|
-|api/admin/article| POST |``{titre, description, date, image (optionnal)}``|``{message: "Your article are create !"}``| Admin create a article |
-|api/admin/article/{id_article} |PUT|``{titre, description, date, image (optionnal)}``|``{message: "Your article are update !"}``|Admin modified the article |
-|api/admin/article/{id_article} |DELETE|``{id_Article}``|``{message: "Your article are delete!"}``|  Admin delete the article|
-|api/admin/agenda |POST|``{titre, description, date, image (optionnal)}``|``{message: "Your activity are create !"}``| Admin create a activity on agenda |
-|api/admin/agenda/{id_agenda} |PUT|``{id_Agenda, titre, description, date, image (optionnal)}``|``{message: "Your activity are update !"}``|Admin modified the activity agenda |
-|api/admin/agenda/{id_agenda} |DELETE|``{id_Agenda}``|``{message: "Your activity are delete !"}``|  Admin delete activity on the agenda|
-|api/event |GET||``{list of event}``| Get all event |
-|api/event/{id_event} |GET|``{id_event}``|``{title, description, date, image}``| Get a event with this id |
-|api/admin/event |POST|``{titre, description, date, image (optionnal)}``|``{message: "Your event are create !"}``| Admin create a event |
-|api/admin/event/{id_event} |PUT|``{id_Agenda, titre, description, date, image (optionnal)}``|``{message: "Your event are update !"}``|Admin modified the event |
-|api/admin/event/{id_event} |DELETE|``{id_Agenda}``|``{message: "Your event are delete !"}``|  Admin delete the event|
+  * Test Environment: Automated/manual tests before deployment
+  * Production Environment: Stable, fully tested code
+* **Bug Tracking**: GitHub Issues for logging and resolution
+* \*\*Release Management
+* Maintain a changelog for each release, detailing new features, bug fixes, and improvements.
 
-
-## Plan SCM and QA Strategies 🛠️  
 
 ## Technical Justifications 🧐  
 
