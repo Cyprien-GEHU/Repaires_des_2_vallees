@@ -1,4 +1,4 @@
-### Technical Documentation - Repaire des 2 Vallées ![favicon-16x16](/Repaires_des_2_vallees/Stage%203/favicon.ico)
+### Technical Documentation - Repaire des 2 Vallées ![favicon-16x16](https://github.com/Cyprien-GEHU/Repaires_des_2_vallees/blob/bryan/Stage%201/Documents/Part%201/favicon.ico)
 
 ## User Stories and Mockups
 
@@ -10,13 +10,88 @@ database: mangoDb
 api external : Ionos
 
 ## Components, Classes, and Database Design
-database :
-- Admin : firstName, LastName, mail, PhoneNumber, rule, password, id_admin, creat at, update at
-- User: nom, prenom, rule, mail, adress, password, PhoneNumber, id_User, creat at, update at
-- Agenda: titre, description, day, image (optionnal), prix, id_agenda, creat at, update at, createby
-- Article : titre, description, date, image (optionnal), creator, id_Article, creat at, update at, createby, category
-- children: firstName, LastName, age
-- event : title, date, creat at, update at, image, id_event
+```mermaid
+classDiagram
+
+class User {
+    + id_user: string
+    + firsname: string
+    + lastName: string
+    + email: string
+    + adress: string
+    + phone: number
+    + create_at: Date
+    + update_at: Date
+    + signin()
+    + login()
+    + logout()
+    + update_account()
+    + delete_account()
+}
+
+class admin {
+    + id_admin: string
+    + firsname: string
+    + lastName: string
+    + email: string
+    + phone: number
+    + rule: string
+    + create_at: Date
+    + update_at: Date
+}
+
+class article {
+    + id_article: string
+    + title: string
+    + description: string
+    + creator: string
+    + picture: png
+    + create_at: Date
+    + update_at: Date
+    + create_article()
+    + update_article()
+    + delete_article()
+    + all_article()
+    + read_oneArticle()
+}
+
+class agenda {
+    + title: string
+    + description: string
+    + creator: string
+    + day: string
+    + create_at: Date
+    + update_at: Date
+    + create_activity()
+    + update_activity()
+    + delete_activity()
+    + all_activity()
+    + read_oneActivity()
+}
+
+class event {
+    + Title: string
+    + Description: string
+    + creator: string
+    + day : date
+    + picture: png
+    + create_at: Date
+    + update_at: Date
+    + create_event()
+    + update_event()
+    + delete_event()
+    + all_event()
+    + read_oneEvent()
+}
+
+User-->article : read
+User-->agenda : read
+User-->event : read
+admin -->User : write
+admin-->article: write
+admin -->agenda : write
+admin --> event: write
+```
 
 ## High-Level Sequence Diagrams
 
@@ -65,7 +140,7 @@ sequenceDiagram
 ```
 
 ### Host diagram
-```mermaid 
+``` mermaid 
 sequenceDiagram
     actor Host
     participant Ionos
@@ -119,7 +194,7 @@ sequenceDiagram
 
 ### Admin part
 
-``` Mermaid
+``` mermaid
 sequenceDiagram
     actor Admin
     participant Ionos
@@ -177,14 +252,14 @@ sequenceDiagram
 
 | **URL**  | **Method**      | **input** (json)                 | **Output** (json)  | Description|
 |------------|-----------------|---------------------------------|--------------|------------|
-|api/user|POST|``{FirstName, LastName, numero, adress, Password}``|``{message: "Your acount are created!"}``| Creation of a user|
+|api/user|POST|``{firsname, lastName, email, adress, phone}``|``{message: "Your acount are created!"}``| Creation of a user|
 |api/auth/login | GET | ``{Email, Password}``|``{token}``| connection user acount|
-|api/user/{id_user}|PUT|``{FirstName, LastName, numero, adress, Password, id}``|``{message: ""Your information have been modified"}``| Modify user account|
+|api/user/{id_user}|PUT|``{firsname, lastName, email, adress, phone, user_id}``|``{message: ""Your information have been modified"}``| Modify user account|
 |api/user/{id_user}|DELETE|``{id_user}``|``{message: "your acount are been delete"}``| Delete the user acount |
 |api/article| GET ||``{list of article}``| Get all article |
-|api/article/{id_article} |GET|``{id_Article}``|``{article}``|  Get a article with this id |
+|api/article/{id_article} |GET|``{id_article}``|``{article}``|  Get a article with this id |
 |api/agenda |GET||``{list of article}``| Get all activity on agenda |
-|api/agenda/{id_agenda} |GET|``{id_Agenda}``|``{activity}``| Get activy on agenda with this id |
+|api/agenda/{id_agenda} |GET|``{id_agenda}``|``{activity}``| Get activy on agenda with this id |
 |api/event |GET||``{list of event}``| Get all event |
 |api/event/{id_event} |GET|``{id_event}``|``{event}``| Get a event with this id |
 
@@ -194,19 +269,19 @@ sequenceDiagram
 |------------|-----------------|---------------------------------|--------------|------------|
 |api/admin/user|GET||``{list of user}``| Admin see all user |
 |api/admin/user/{id_user}|GET|``{id_user}``|``{User info}``| Admin see one user with this id|
-|api/admin/user/{id_user}|PUT|``{FirstName, LastName, numero, adress, Password, id_User, id_admin}``| ``{message: "the user info have been modified"}``| admin modified the user data |
+|api/admin/user/{id_user}|PUT|``{firsname, lastName, email, adress, phone, id_user, id_admin}``| ``{message: "the user info have been modified"}``| admin modified the user data |
 |api/admin/user/{id_user}|DELETE|``{id_user}``|``{message: "the acount user are delete"}``| Admin delete the user acount|
 |api/admin/article| POST |``{titre, description, date, image (optionnal)}``|``{message: "Your article are create !"}``| Admin create a article |
 |api/admin/article/{id_article} |PUT|``{titre, description, date, image (optionnal)}``|``{message: "Your article are update !"}``|Admin modified the article |
-|api/admin/article/{id_article} |DELETE|``{id_Article}``|``{message: "Your article are delete!"}``|  Admin delete the article|
-|api/admin/agenda |POST|``{titre, description, date, image (optionnal)}``|``{message: "Your activity are create !"}``| Admin create a activity on agenda |
-|api/admin/agenda/{id_agenda} |PUT|``{id_Agenda, titre, description, date, image (optionnal)}``|``{message: "Your activity are update !"}``|Admin modified the activity agenda |
-|api/admin/agenda/{id_agenda} |DELETE|``{id_Agenda}``|``{message: "Your activity are delete !"}``|  Admin delete activity on the agenda|
+|api/admin/article/{id_article} |DELETE|``{id_article}``|``{message: "Your article are delete!"}``|  Admin delete the article|
+|api/admin/agenda |POST|``{titre, description, date, picture (optionnal)}``|``{message: "Your activity are create !"}``| Admin create a activity on agenda |
+|api/admin/agenda/{id_agenda} |PUT|``{id_agenda, titre, description, date, image (optionnal)}``|``{message: "Your activity are update !"}``|Admin modified the activity agenda |
+|api/admin/agenda/{id_agenda} |DELETE|``{id_agenda}``|``{message: "Your activity are delete !"}``|  Admin delete activity on the agenda|
 |api/event |GET||``{list of event}``| Get all event |
 |api/event/{id_event} |GET|``{id_event}``|``{title, description, date, image}``| Get a event with this id |
 |api/admin/event |POST|``{titre, description, date, image (optionnal)}``|``{message: "Your event are create !"}``| Admin create a event |
-|api/admin/event/{id_event} |PUT|``{id_Agenda, titre, description, date, image (optionnal)}``|``{message: "Your event are update !"}``|Admin modified the event |
-|api/admin/event/{id_event} |DELETE|``{id_Agenda}``|``{message: "Your event are delete !"}``|  Admin delete the event|
+|api/admin/event/{id_event} |PUT|``{id_agenda, titre, description, date, image (optionnal)}``|``{message: "Your event are update !"}``|Admin modified the event |
+|api/admin/event/{id_event} |DELETE|``{id_agenda}``|``{message: "Your event are delete !"}``|  Admin delete the event|
 
 
 ## Plan SCM and QA Strategies
