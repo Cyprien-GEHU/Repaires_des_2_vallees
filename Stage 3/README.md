@@ -265,8 +265,6 @@ sequenceDiagram
 | `/api/user/{id_user}` | DELETE     | `{ id_user }`                                           | `{ message: "Your account has been deleted." }` | Delete user account |
 | `/api/articles`       | GET        | None                                                    | `{ articles: [...] }`                           | Get all articles    |
 
-### **Admin APIs**
-
 ### **Host and admin part**
 
 | **URL**  | **Method**      | **input** (json)                 | **Output** (json)  | description|
