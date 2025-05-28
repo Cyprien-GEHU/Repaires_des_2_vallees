@@ -366,18 +366,60 @@ sequenceDiagram
   * Integration Tests: Modules working together
   * End-to-End Tests: User workflows
   * Manual Tests: Critical user flows/UI validation
-* **Tools**:
+ 
+* **SCM (Software Configuration Management)**:
 
-  * W3C: HTML/CSS validation
-  * Mocha: Backend testing
-  * ESLint: Node.js linting
-* **Environments**:
+* Version Control: Git to manage project versioning.
 
-  * Test Environment: Automated/manual tests before deployment
-  * Production Environment: Stable, fully tested code
-* **Bug Tracking**: GitHub Issues for logging and resolution
-* \*\*Release Management
-* Maintain a changelog for each release, detailing new features, bug fixes, and improvements.
+  * Branches:
+
+    * main: Production-ready code.
+
+    * test: Branch for ongoing integration and development.
+
+    * bryan/*, cyprien/*: Individual branches to develop specific features.
+
+    * test/*: Branches to quickly fix bugs in production.
+    
+    * Git Workflow: Use a methodology like GitFlow or GitHub Flow to structure collaborative development.
+      
+* **Unit Tests:**
+
+  * **Backend (Node.js):**
+    * **Jest**: Ideal for testing isolated JavaScript functions.  
+      * Example: Test REST API endpoints to ensure expected data is returned.  
+    * **Mocha + Chai**: Alternative for writing clear and understandable tests.
+
+  * **Frontend (HTML/CSS):**
+    * **W3C Validator**: Validate HTML syntax.  
+    * **stylelint**: Detect CSS style errors.
+
+* **Integration Tests:**
+
+  * **Backend (Node.js):**
+    * **Supertest + Jest**: Test API route integrations.  
+      * Example: Validate API calls interact correctly with the database.
+
+  * **Frontend:**
+    * **Postman**: Simulate API requests to test communication between frontend and backend.
+
+* **End-to-End (E2E) Tests:**
+
+  * **Tools:**
+    * **Cypress**: Best for testing complete user flows in simple web applications.  
+      * Example: Verify form submission and data transfer to the backend.  
+    * **Playwright/Puppeteer**: Alternatives for lightweight E2E testing.
+
+* **Environments:**
+
+  * **Test Environment:**
+    * Isolated Node.js server with a mock database (e.g., SQLite in memory or test MongoDB).  
+    * Local hosting for HTML/CSS files to test interactions.
+
+  * **Production Environment:**
+    * Ensure static code analysis using **ESLint** before deployment.  
+    * Monitor performance and errors with tools like **New Relic**.
+
 
 
 ## Technical Justifications 🧐  
