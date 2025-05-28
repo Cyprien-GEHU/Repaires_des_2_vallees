@@ -43,7 +43,7 @@ As a user, I want an AI assistant to help clients so that it can assist them if 
 ### Maquettes des écrans principaux
 # Pour l'interface utilisateur, je peux créer des maquettes pour les écrans clés suivants :
 ## ecran d'accueil:
-![accueil](/home/bryan/Repaires_des_2_vallees/Stage 3/images/Messenger_creation_201D34D1-0827-4A20-98E3-27BFC08A5AC9.jpg)
+![accueil](images/Messenger_creation_201D34D1-0827-4A20-98E3-27BFC08A5AC9.jpg)
 
 Écran de connexion/inscription
 
