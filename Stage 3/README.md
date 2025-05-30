@@ -62,6 +62,26 @@
 * **Database**: MongoDB
 * **External APIs**: Ionos
 
+```mermaid
+flowchart 
+    U(User)
+    A(admin)
+    FE("frontend (HTML, CSS)")
+    BE("Back-end (node.js)")
+    API("API (Ionos)")
+    DB[("database (Mongo db)")]
+
+    U-->|request|API
+    API-->|request HTTPS|FE
+    FE-->|request HTTPS|BE
+    BE-->|request HTTPS|DB
+    A-->|modify database|DB 
+    DB-.->|Response database|BE
+    BE-.->|generate data|FE
+    FE-.->|gennerate page HTML/CSS|API
+    API-.->|Send page to the User|U
+```
+
 ---
 
 # Components, Classes, and Database Design 📊
