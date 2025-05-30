@@ -425,7 +425,11 @@ sequenceDiagram
 ## Technical Justifications 🧐  
 
 We goes with a classique technologie for these raison :
-- Our client are a litle assiosiation
-- If the client recrute a developper web the web site need to be simple
-- The developper need to be simple
+- Repaire des 2 Vallées is a small association, so we don't need a large hosting provider.
+- We use simple technology if the association is hiring developers.
+- Given the small number of possible users, we use a simple database.
+- We use Mango DB for the database because it's easy to use and configure, and our target audience is parents of children.
+- We use simple technologies like HTML, CSS, and Node.js to make it easier for another developer to take over in the future.
+- We use Git for version control because we need to be able to roll back and share work with other team members.
+- We use Ionos hosting because it was requested directly by the Repaire des 2 Vallées association.
 --- 
