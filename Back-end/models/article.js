@@ -6,8 +6,8 @@ const model_article = mongoose.Schema({
     description: {type: String, required: true, unique:true},
     creator: {type: ["string <admin_id>"], required: true, unique:true},
     picture: {type: String, required: false},
-    create_at: {type: Date, required: true},
-    udpate_at: {type: Date, required: true},
+    created_at: { type: Date, required: true, default: Date.now },
+    update_at: { type: Date, required: true, default: Date.now }
 })
 
 module.exports = mongoose.model('modelArticle', model_article);
