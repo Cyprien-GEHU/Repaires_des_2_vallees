@@ -1,32 +1,32 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
 
 //Router GET
-router.get('/admin/user');
-router.get('/admin/user/:id');
-router.get('/admin/article');
-router.get('/admin/article/:id');
-router.get('/admin/agenda');
-router.get('/admin/agenda/:id');
-router.get('/admin/event');
-router.get('/admin/event/:id');
+router.get('/user');
+router.get('/user/:id');
+router.get('/article');
+router.get('/article/:id');
+router.get('/agenda')
+router.get('/agenda/:id');
+router.get('/event');
+router.get('/event/:id');
 
 //Router POST
-router.post('/admin/user');
-router.post('/admin/article');
-router.post('/admin/agenda');
-router.post('/admin/event');
+router.post('/user');
+router.post('/article');
+router.post('/agenda');
+router.post('/event');
 
 //Router PUT
-router.put('/admin/user/:id');
-router.put('/admin/article/:id');
-router.put('/admin/agenda/:id');
-router.put('/admin/event/:id');
+router.put('/user/:id');
+router.put('/article/:id');
+router.put('/agenda/:id');
+router.put('/event/:id');
 
 //Router DELETE
-router.delete('/admin/user/:id');
-router.delete('/admin/article/:id');
-router.delete('/admin/agenda/:id');
-router.delete('/admin/event/:id');
+router.delete('/user/:id');
+router.delete('/article/:id');
+router.delete('/agenda/:id');
+router.delete('/event/:id');
 
 module.exports = router;
