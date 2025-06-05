@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const user = require('../models/user')
 
 //Router GET
 router.get('/user');
@@ -12,7 +13,7 @@ router.get('/event');
 router.get('/event/:id');
 
 //Router POST
-router.post('/user');
+router.post('/user')
 router.post('/article');
 router.post('/agenda');
 router.post('/event');
