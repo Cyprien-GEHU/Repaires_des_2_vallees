@@ -5,10 +5,10 @@ const model_user = mongoose.Schema({
     lastName: {type: String, required: true},
     password: {type: String, required: true},
     email: {type: String, required: true, unique:true},
-    adress: {type: String, required: true, unique:true},
+    address: {type: String, required: true, unique:true},
     phone: {type: Number, required: true, unique:true},
     created_at: { type: Date, required: true, default: Date.now },
     update_at: { type: Date, required: true, default: Date.now }
 })
 
-module.exports = mongoose.model('users', model_user);
+module.exports = mongoose.model('user', model_user);
