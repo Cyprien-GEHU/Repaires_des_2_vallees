@@ -9,9 +9,9 @@ router.get('/', userController.getAllUser);
 router.get('/:id',userController.getOneUser );
 
 // Modify this account
-router.put('/:id');
+router.put('/:id', userController.create_user);
 
 // Delete this account
-router.delete('/:id')
+router.delete('/:id', userController.delete_user);
 
 module.exports = router;
