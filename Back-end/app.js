@@ -20,6 +20,7 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use(express.json());
 app.use('/users', routeUsers);
 app.use('/admin', routeAdmin);
 app.use('/article', routeArticle);
