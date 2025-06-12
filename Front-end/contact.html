@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>WildernessBot - Contact</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+        /* Styles spécifiques à la page Contact */
+        .contact-header {
+            text-align: center;
+            margin: 3rem 1rem 2rem;
+            font-weight: 600;
+            font-size: 1.8rem;
+            color: #2a6f3a;
+        }
+        .contact-cards {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+            padding: 0 1rem;
+        }
+        .contact-card {
+            background: #e6f2e9;
+            border: 2px solid #2a6f3a;
+            border-radius: 12px;
+            padding: 2rem 3rem;
+            width: 280px;
+            text-align: center;
+            cursor: pointer;
+            user-select: none;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .contact-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 20px rgba(42, 111, 58, 0.3);
+        }
+        .contact-card h3 {
+            margin-bottom: 1rem;
+            color: #2a6f3a;
+        }
+        .contact-card p {
+            font-size: 1.1rem;
+            word-break: break-all;
+            color: #333;
+        }
+        /* Message de confirmation copie */
+        .copy-msg {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #2a6f3a;
+            color: white;
+            padding: 0.7rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 600;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+            z-index: 1000;
+        }
+        .copy-msg.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        /* Formulaire */
+        form.contact-form {
+            max-width: 600px;
+            margin: 0 auto 4rem;
+            padding: 0 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+        form.contact-form label {
+            font-weight: 600;
+            color: #2a6f3a;
+        }
+        form.contact-form input,
+        form.contact-form textarea {
+            padding: 0.7rem 1rem;
+            border-radius: 8px;
+            border: 1.8px solid #2a6f3a;
+            font-size: 1rem;
+            resize: vertical;
+            font-family: inherit;
+            transition: border-color 0.3s ease;
+        }
+        form.contact-form input:focus,
+        form.contact-form textarea:focus {
+            border-color: #4caf50;
+            outline: none;
+        }
+        form.contact-form button {
+            width: fit-content;
+            background-color: #2a6f3a;
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            font-weight: 700;
+            font-size: 1.1rem;
+            border-radius: 12px;
+            cursor: pointer;
+            align-self: center;
+            transition: background-color 0.3s ease;
+        }
+        form.contact-form button:hover {
+            background-color: #4caf50;
+        }
+        /* Responsive */
+        @media (max-width: 700px) {
+            .contact-cards {
+                flex-direction: column;
+                align-items: center;
+            }
+            .contact-card {
+                width: 90%;
+                max-width: 400px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <nav class="navbar">
+            <div class="logo">
+                <img src="logo.png" alt="WildernessBot Logo" />
+                <a href="index.html">
+                <span>WildernessBot</span>
+            </div>
+            <ul class="nav-links">
+            </ul>
+            <a href="#" class="btn-login">Connexion Soon</a>
+        </nav>
+    </header>
+
+    <main>
+        <h2 class="contact-header">Contactez-nous</h2>
+
+        <section class="contact-cards">
+            <div class="contact-card" data-copy="wildernessbots@gmail.com" title="Cliquez pour copier l'email">
+                <h3>Email</h3>
+                <p>Réponse sous 24H</p>
+            </div>
+            <div class="contact-card" data-copy="https://discord.gg/WCqaZgjsgX" title="Cliquez pour copier le lien Discord">
+                <h3>Discord</h3>
+                <p>N'hésitez pas as ouvrir un ticket</p>
+            </div>
+        </section>
+
+        <section>
+            <form class="contact-form" action="#" method="POST">
+                <label for="name">Nom complet</label>
+                <input type="text" id="name" name="name" placeholder="Votre nom" required />
+
+                <label for="email">Adresse email</label>
+                <input type="email" id="email" name="email" placeholder="Votre email" required />
+
+                <label for="message">Message</label>
+                <textarea id="message" name="message" rows="6" placeholder="Votre message..." required></textarea>
+
+                <button type="submit">Soon</button>
+            </form>
+        </section>
+    </main>
+
+    <div id="copyMsg" class="copy-msg">Copié dans le presse-papier !</div>
+
+    <footer>
+        <p>&copy; 2025 WildernessBot. Tous droits réservés. | Hébergement de bots Discord</p>
+    </footer>
+
+    <script>
+        // Fonction copie dans le presse-papier et message confirmation
+        const cards = document.querySelectorAll('.contact-card');
+        const copyMsg = document.getElementById('copyMsg');
+
+        cards.forEach(card => {
+            card.addEventListener('click', () => {
+                const textToCopy = card.getAttribute('data-copy');
+                navigator.clipboard.writeText(textToCopy).then(() => {
+                    copyMsg.classList.add('show');
+                    setTimeout(() => copyMsg.classList.remove('show'), 2000);
+                }).catch(() => {
+                    alert('Erreur lors de la copie.');
+                });
+            });
+        });
+
+        // (Optionnel) Gestion du formulaire : ici simple preventDefault (à adapter selon ton back)
+        document.querySelector('.contact-form').addEventListener('submit', e => {
+            e.preventDefault();
+            alert('Merci pour votre message ! (Simulation d\'envoi)');
+            e.target.reset();
+        });
+    </script>
+</body>
+</html>
