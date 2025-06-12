@@ -13,6 +13,7 @@ body {
 }
 header {
   display: flex;
+  justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
   border-bottom: 4px solid #00cc00;
@@ -23,6 +24,18 @@ header {
 }
 header img {
   height: 60px;
+}
+.btns a {
+  margin-left: 1rem;
+  padding: 0.6rem 1.2rem;
+  background: #43a047;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: background 0.3s;
+}
+.btns a:hover {
+  background: #2e7d32;
 }
 h1 {
   text-align: center;
