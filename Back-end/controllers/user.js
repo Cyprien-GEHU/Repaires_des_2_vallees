@@ -19,7 +19,6 @@ exports.getOneUser = (req, res) => {
 }
 
 exports.create_user = (req, res) => {
-  const decodedToken = jwt.verify(req.headers.token, 'RANDOM_TOKEN_SECRET');
   bcrypt.hash(req.body.password, 3, (err, password) => {
     if (err) {
               // Handle error
@@ -41,7 +40,6 @@ exports.create_user = (req, res) => {
 }
 
 exports.update_user = (req, res) => {
-  const decodedToken = jwt.verify(req.headers.token, 'RANDOM_TOKEN_SECRET');
   const url = req.url;
   const split = url.split("/");
   const id = split[2];
@@ -66,12 +64,17 @@ exports.update_user = (req, res) => {
 }
 
 exports.delete_user = (req, res) => {
-  const decodedToken = jwt.verify(req.headers.token, 'RANDOM_TOKEN_SECRET');
   const url = req.url;
   const split = url.split("/");
   const id = split[2];
   
-  user.deleteOne({_id: id})
-    .then(() => res.status(201).json({ message: 'user delete !' }))
-    .catch(error => res.status(400).json({ error }));
+  if (req.userRole == "admin" || req.userRole == "animator") {
+    user.deleteOne({_id: id})
+      .then(() => res.status(201).json({ message: 'user delete !' }))
+      .catch(error => res.status(400).json({ error }));
+  }
+  
+  else {
+    return res.status(501).json({message: "you are not a admin, so you can delete this account"})
+  }
 }
