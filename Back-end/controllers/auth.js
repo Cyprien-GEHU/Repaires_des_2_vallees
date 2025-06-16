@@ -4,18 +4,18 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 exports.signin = (req, res, next) => {
-    bcrypt.hash(req.query.password, 3, (err, password) => {
+    bcrypt.hash(req.body.password, 3, (err, password) => {
         if (err) {
             // Handle error
             return;
         }
         const newUser = new user({
-            firstName: req.query.firstName,
-            lastName: req.query.lastName,
-            email: req.query.email,
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            email: req.body.email,
             password: password,
-            address: req.query.address,
-            phone: req.query.phone
+            address: req.body.address,
+            phone: req.body.phone
         })
         console.log(newUser)
         newUser.save()
@@ -25,22 +25,18 @@ exports.signin = (req, res, next) => {
 }
 
 exports.login = (req, res, next) => {
-    admin.findOne({firstName: req.query.firstName})
+    admin.findOne({firstName: req.body.firstName})
         .then(post => {
             if (!post) {
                 return res.status(401).json({ error: 'Utilisateur non trouvé !' });
             }
-            bcrypt.compare(req.query.password, post.password)
+            bcrypt.compare(req.body.password, post.password)
                 .then(valid => {
                     if (!valid) {
                         return res.status(401).json({ error: 'Mot de passe incorrect !' });
                     }
                     const token = jwt.sign({ userId: post._id, rule: post.rule }, 'RANDOM_TOKEN_SECRET', {expiresIn: '2h'});
-                    res.status(200).json({
-                        userId: user._id,
-                        token: token,
-                        rule: user.rule,
-                    });
+                    res.cookie("token", token, {httpOnly: true}).status(200).json({token: token})
             });
     })
 }
