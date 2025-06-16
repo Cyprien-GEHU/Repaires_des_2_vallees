@@ -10,7 +10,7 @@ exports.get_article = (req, res) => {
 exports.get_OneArticle = (req, res) => {
   const url = req.url;
   const split = url.split("/");
-  const id = split[2];
+  const id = split[1];
   article.findOne({_id: id})
     .then(post => {res.status(200).json(post)})
     .catch(error => res.status(400).json({ error }));

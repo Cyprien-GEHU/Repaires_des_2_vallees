@@ -15,7 +15,7 @@ window.addEventListener('DOMContentLoaded', () => {
           <div class="card-body">
             <h2>${article.Title}</h2>
             <p>${article.description}</p>
-            <a href="#">Lire plus</a>
+            <a href="http://localhost:3000/article/${article._id}">Lire plus</a>
           </div>
         `;
 
