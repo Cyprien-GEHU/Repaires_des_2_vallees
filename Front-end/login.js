@@ -7,19 +7,19 @@ form.addEventListener('submit', async (e) => {
   const password = document.getElementById('password').value.trim();
 
   try {
-    const response = await fetch('http://localhost:3000/api/auth/login', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email, password })
-  });
-
+    const response = await fetch('http://localhost:3000/auth/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password })
+    });
 
     const data = await response.json();
+
     if (response.ok) {
-      alert('Connexion réussie !');
-      // Redirection ou stockage d'un token peut se faire ici
-      // window.location.href = "/dashboard.html";
+      // Redirection vers acceuil.html si la connexion réussit
+      window.location.href = 'acceuil.html';
     } else {
+      // Affiche un message d'erreur et reste sur la même page
       alert('Erreur : ' + data.message);
     }
   } catch (err) {

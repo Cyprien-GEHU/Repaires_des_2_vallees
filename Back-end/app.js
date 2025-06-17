@@ -1,4 +1,3 @@
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 const express = require('express');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
