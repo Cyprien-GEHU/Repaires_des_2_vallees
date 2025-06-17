@@ -1,38 +1,30 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Repaire des 2 Vallées - Create Account</title>
-<link rel="stylesheet" href="login.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Connexion – Repaire des 2 Vallées</title>
+  <link rel="stylesheet" href="login.css" />
 </head>
 <body>
   <div class="container">
     <h1>Repaire des 2 Vallées</h1>
-    <h2>Create an account</h2>
-    <p class="description">Enter first name to sign up for this app</p>
+    <h2>Connexion</h2>
+    <p class="description">Connecte-toi à ton compte</p>
 
-    <form>
-      <input type="email" placeholder="email@domain.com" required />
-      <button type="submit">Sign up with First name</button>
+    <form id="login-form">
+      <input type="email" id="email" placeholder="email@domaine.com" required />
+      <input type="password" id="password" placeholder="Mot de passe" required />
+      <button type="submit">Se connecter</button>
     </form>
 
-    <div class="divider">or continue with</div>
-
-    <button class="google-btn" type="button" aria-label="Sign up with Google">
-      <img
-        class="google-icon"
-        src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
-        alt="Google logo"
-      />
-      Google
-    </button>
-
     <p class="terms">
-      By clicking continue, you agree to our
-      <a href="#">Terms of Service</a> and
-      <a href="#">Privacy Policy</a>
+      En te connectant, tu acceptes nos
+      <a href="#">Conditions d'utilisation</a> et notre
+      <a href="#">Politique de confidentialité</a>.
     </p>
   </div>
+
+  <script src="login.js"></script>
 </body>
 </html>
