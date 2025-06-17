@@ -10,6 +10,15 @@ exports.get_agenda = (req, res) => {
 exports.get_OneAgenda = (req, res) => {
   const url = req.url;
   const split = url.split("/");
+  const id = split[1];
+  agenda.findOne({_id: id})
+    .then(post => {res.status(200).json(post)})
+    .catch(error => res.status(400).json({ error }));
+}
+
+exports.get_OneAgendaAdmin = (req, res) => {
+  const url = req.url;
+  const split = url.split("/");
   const id = split[2];
   agenda.findOne({_id: id})
     .then(post => {res.status(200).json(post)})
