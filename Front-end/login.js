@@ -17,7 +17,7 @@ form.addEventListener('submit', async (e) => {
 
     if (response.ok) {
       // Redirection vers acceuil.html si la connexion réussit
-      window.location.href = 'acceuil.html';
+      //window.location.href = 'acceuil.html';
     } else {
       // Affiche un message d'erreur et reste sur la même page
       alert('Erreur : ' + data.message);
