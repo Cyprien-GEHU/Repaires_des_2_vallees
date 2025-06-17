@@ -11,6 +11,15 @@ exports.getAllUser = (req, res) => {
 exports.getOneUser = (req, res) => {
   const url = req.url;
   const split = url.split("/");
+  const id = split[1];
+
+  article.findOne({_id: id})
+    .then(post => {res.status(200).json(post)})
+    .catch(error => res.status(400).json({ error }));
+}
+exports.get_OneUserAdmin = (req, res) => {
+  const url = req.url;
+  const split = url.split("/");
   const id = split[2];
 
   article.findOne({_id: id})
