@@ -1,4 +1,5 @@
 const express = require('express');
+const upload = require('../middleware/multer_confing')
 const userControl = require('../controllers/user')
 const articleControl = require('../controllers/article')
 const agendaControl = require('../controllers/agenda')
@@ -8,25 +9,25 @@ const router = express.Router();
 
 //Router GET
 router.get('/user', authToken, userControl.getAllUser);
-router.get('/user/:id', authToken, userControl.getOneUser);
+router.get('/user/:id', authToken, userControl.get_OneUserAdmin);
 router.get('/article', authToken, articleControl.get_article);
-router.get('/article/:id', authToken, articleControl.get_OneArticle);
+router.get('/article/:id', authToken, articleControl.get_OneArticleAdmin);
 router.get('/agenda', authToken, agendaControl.get_agenda)
-router.get('/agenda/:id', authToken, agendaControl.get_OneAgenda);
+router.get('/agenda/:id', authToken, agendaControl.get_OneAgendaAdmin);
 router.get('/event', authToken, eventControl.get_event);
-router.get('/event/:id', authToken, eventControl.get_OneEvent);
+router.get('/event/:id', authToken, eventControl.get_OneEventAdmin);
 
 //Router POST
 router.post('/user', authToken, userControl.create_user)
-router.post('/article', authToken, articleControl.create_article);
+router.post('/article', authToken, upload.single('image'), articleControl.create_article);
 router.post('/agenda', authToken, agendaControl.create_agenda);
-router.post('/event', authToken, eventControl.create_event);
+router.post('/event', authToken, upload.single('image'), eventControl.create_event);
 
 //Router PUT
 router.put('/user/:id', authToken, userControl.update_user);
-router.put('/article/:id', authToken, articleControl.update_article);
+router.put('/article/:id', authToken, upload.single('image'), articleControl.update_article);
 router.put('/agenda/:id', authToken, agendaControl.update_agenda);
-router.put('/event/:id', authToken, eventControl.update_event);
+router.put('/event/:id', authToken, upload.single('image'), eventControl.update_event);
 
 //Router DELETE
 router.delete('/user/:id', authToken, userControl.delete_user);

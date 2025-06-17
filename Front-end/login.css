@@ -47,6 +47,22 @@ input[type="email"]:focus {
   border-color: #008000;
   outline: none;
 }
+input[type="password"] {
+  width: 100%;
+  padding: 0.65rem 1rem;
+  font-size: 1rem;
+  border: 1.5px solid #ddd;
+  border-radius: 6px;
+  margin-bottom: 1.5rem;
+  box-sizing: border-box;
+  transition: border-color 0.3s;
+}
+
+input[type="password"]:focus {
+  border-color: #008000;
+  outline: none;
+}
+
 
 button {
   background-color: #008000;
