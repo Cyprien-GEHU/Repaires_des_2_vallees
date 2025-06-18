@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  fetch(`http://localhost:3000/article/${id}`) // Remplace par l'URL correcte de ton backend
+  fetch(`http://localhost:3000/articles/${id}`) // Remplace par l'URL correcte de ton backend
     .then((response) => {
       if (!response.ok) throw new Error("Erreur lors de la récupération de l'article.");
       return response.json();

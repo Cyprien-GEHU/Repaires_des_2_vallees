@@ -12,7 +12,14 @@ const form = document.getElementById('edit-form');
 const backLink = document.getElementById('back-link');
 
 // Définit le lien retour vers manage.html avec le bon type
-backLink.href = `manage.html?type=${type}`;
+let typePlural = '';
+if (type === 'articles') typePlural = 'articles';
+else if (type === 'events') typePlural = 'events';
+else if (type === 'agenda') typePlural = 'agenda'; // pas de changement ici
+console.log('type avant transformation:', type);
+
+backLink.href = `manage.html?type=${typePlural}`;
+
 
 if (!type || !id) {
   form.innerHTML = '<p class="error-message">Paramètres manquants.</p>';
@@ -48,8 +55,8 @@ function createField(labelText, typeInput, name, value = '') {
 async function loadData() {
   let url = '';
 
-  if (type === 'articles') url = `http://localhost:3000/article/${id}`;
-  else if (type === 'events') url = `http://localhost:3000/event/${id}`;
+  if (type === 'article') url = `http://localhost:3000/article/${id}`;
+  else if (type === 'event') url = `http://localhost:3000/event/${id}`;
   else if (type === 'agenda') url = `http://localhost:3000/agenda/${id}`;
   else {
     form.innerHTML = '<p class="error-message">Type inconnu.</p>';

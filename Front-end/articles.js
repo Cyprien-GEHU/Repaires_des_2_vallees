@@ -1,6 +1,6 @@
 // articles.js
 window.addEventListener('DOMContentLoaded', () => {
-  fetch('http://localhost:3000/article')
+  fetch('http://localhost:3000/articles')
     .then(res => res.json())
     .then(articles => {
       const container = document.querySelector('.articles');
