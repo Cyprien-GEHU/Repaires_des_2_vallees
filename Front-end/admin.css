@@ -6,14 +6,16 @@ body {
 }
 
 header {
-  background-color: white;
-  border-bottom: 2px solid green;
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  padding: 10px 20px;
+  align-items: center;
+  padding: 1rem 2rem;
+  border-bottom: 4px solid #00cc00;
+  background: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
-
 header img {
   height: 60px;
 }
@@ -26,66 +28,40 @@ header img {
   border-radius: 8px;
   transition: background 0.3s;
 }
-
 .btns a:hover {
   background: #2e7d32;
 }
 
 header h1 {
+  flex-grow: 1;
   font-size: 28px;
   font-weight: bold;
   text-align: center;
-  flex-grow: 1;
 }
-
-.admin-container {
-  display: flex;
-  padding: 30px;
-  gap: 30px;
-}
-
-.form-section, .agenda-section {
-  background-color: #00b300;
-  border-radius: 20px;
-  padding: 20px;
-  flex: 1;
-  color: black;
-}
-
-.form-section h2, .agenda-section h2 {
+h1 {
   text-align: center;
+  margin: 2rem 1rem;
+  font-size: 2.5rem;
+  color: #006600;
+}
+.admin-main {
+  padding: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.admin-main button {
+  background-color: #43a047;
   color: white;
-}
-
-label {
-  display: block;
-  margin-top: 10px;
-  font-weight: bold;
-  color: white;
-}
-
-input[type="text"],
-input[type="file"],
-textarea,
-input[type="date"] {
-  width: 100%;
-  padding: 8px;
-  margin-top: 5px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-}
-
-button {
-  margin-top: 15px;
-  padding: 10px 20px;
   border: none;
-  background-color: white;
-  color: green;
-  font-weight: bold;
+  padding: 15px 25px;
+  border-radius: 8px;
+  font-size: 16px;
   cursor: pointer;
-  border-radius: 5px;
+  transition: background-color 0.3s;
 }
 
-button:hover {
-  background-color: #e6ffe6;
+.admin-main button:hover {
+  background-color: #2e7d32;
 }
