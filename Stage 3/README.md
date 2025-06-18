@@ -1,5 +1,90 @@
-### Technical Documentation - Repaire des 2 Vallées ![favicon-16x16](https://github.com/Cyprien-GEHU/Repaires_des_2_vallees/blob/bryan/Stage%201/Documents/Part%201/favicon.ico)
+### Technical Documentation - Repaire des 2 Vallées !![favicon-16x16](https://github.com/Cyprien-GEHU/Repaires_des_2_vallees/blob/bryan/Stage%201/Documents/Part%201/favicon.ico)
 
+---
+
+# User Stories and Mockups 📚
+
+## Prioritized User Stories 🚀
+
+### **Must Have** ✅
+
+* **User Stories**:
+
+  * 👤 *As a user, I want to sign up and log in so that I can securely access my account.*
+  * 📰 *As a user, I want to browse the association's articles so that I can stay informed.*
+  * 📅 *As a user, I want to see which activities/articles I am enrolled in so that I know when to attend.*
+  * 🔔 *As a user, I want to receive notifications for activity/article deadlines so that I never miss anything.*
+
+### **Should Have** 💡
+
+* **User Stories**:
+
+  * 💻 *As an administrator, I want to manage the association's articles so that I can edit or delete them if necessary.*
+  * 🧑‍🔧 *As a user, I want to collaborate with others by sharing projects so that we can work efficiently together.*
+  * 🕗 *As a user, I want to integrate my calendar with the application so that I can synchronize my tasks across platforms.*
+  * 🎨 *As a user, I want to customize my profile so that I can make my experience more personal.*
+
+### **Could Have** 🌟
+
+* **User Stories**:
+
+  * 🌃 *As a user, I want a dark mode so that I can use the application comfortably in low-light environments.*
+
+### **Won’t Have (Excluded from MVP)** ❌
+
+* **User Stories**:
+
+  * 🎤 *As a user, I want to use voice commands to find an activity so that I can search without using the keyboard.*
+  * 🤖 *As a user, I want an AI assistant to help clients so that it can assist them if they encounter problems on the site.*
+
+---
+
+## Main Screen Mockups 🎨
+
+### 🏠 Home Screen
+
+![Home Screen](images/Messenger_creation_201D34D1-0827-4A20-98E3-27BFC08A5AC9.jpg)
+
+### 🔐 Login/Sign-Up Screen
+
+![Login/Sign-Up Screen](images/logininscriptions.png)
+
+### 📜 Articles Page Preview
+
+![Articles Page Preview](images/Articles.png)
+
+---
+
+# Design System Architecture 🖌️
+
+* **Frontend**: HTML, CSS
+* **Backend**: Node.js, Express
+* **Database**: MongoDB
+* **External APIs**: Ionos
+
+```mermaid
+flowchart 
+    U(User)
+    A(admin)
+    FE("frontend (HTML, CSS)")
+    BE("Back-end (node.js)")
+    API("API (Ionos)")
+    DB[("database (Mongo db)")]
+
+    U-->|request|API
+    API-->|request HTTPS|FE
+    FE-->|request HTTPS|BE
+    BE-->|request HTTPS|DB
+    A-->|modify database|DB 
+    DB-.->|Response database|BE
+    BE-.->|generate data|FE
+    FE-.->|gennerate page HTML/CSS|API
+    API-.->|Send page to the User|U
+```
+
+---
+
+# Components, Classes, and Database Design 📊
 ## User Stories and Mockups
 
 
@@ -93,102 +178,96 @@ admin -->agenda : write
 admin --> event: write
 ```
 
-## High-Level Sequence Diagrams
+### **Database Schema**:
 
-### User diagram
+* **Admin**:
 
-``` mermaid
+  * `firstName`, `lastName`, `email`, `phoneNumber`, `role`, `password`, `id_admin`, `created_at`, `updated_at`
+* **User**:
+
+  * `firstName`, `lastName`, `role`, `email`, `address`, `password`, `phoneNumber`, `id_user`, `created_at`, `updated_at`
+* **Agenda**:
+
+  * `title`, `description`, `day`, `image` (optional), `price`, `id_agenda`, `created_at`, `updated_at`, `created_by`
+* **Article**:
+
+  * `title`, `description`, `date`, `image` (optional), `creator`, `id_article`, `created_at`, `updated_at`, `created_by`, `category`
+* **Children**:
+
+  * `firstName`, `lastName`, `age`
+* **Event**:
+
+  * `title`, `date`, `created_at`, `updated_at`, `image`, `id_event`
+
+---
+
+# High-Level Sequence Diagrams 📊
+
+### **User Interaction**
+
+```mermaid
 sequenceDiagram
     actor User
     participant Ionos
     participant MongoDB
 
-    User->>Ionos: Fetch all article
-    Ionos->>MongoDB: GET /article
-    MongoDB-->>Ionos: Return port 200
-    Ionos-->>User: List of all article
+    User->>Ionos: Fetch all articles
+    Ionos->>MongoDB: GET /articles
+    MongoDB-->>Ionos: Return status 200
+    Ionos-->>User: List of all articles
 
-    User->>Ionos: Get one article 
-    Ionos->>MongoDB: GET /article/{id_article}
-    alt article found
-    MongoDB-->>Ionos: Return port 200
-    Ionos-->>User: Article found
-    else article not found
-    MongoDB-->>Ionos: Return port 404
+    User->>Ionos: Get one article
+    Ionos->>MongoDB: GET /articles/{id_article}
+    alt Article Found
+    MongoDB-->>Ionos: Return status 200
+    Ionos-->>User: Article details
+    else Article Not Found
+    MongoDB-->>Ionos: Return status 404
     Ionos-->>User: Article not found
     end
 
-    User->>Ionos: Modify user account info
+    User->>Ionos: Modify account information
     Ionos->>MongoDB: PUT /user/{user_id}
-    alt User
-    MongoDB-->>Ionos: Return port 200
-    Ionos-->>User: Article found
-    else another user
-    MongoDB-->>Ionos: Return port 401
-    Ionos-->>User: Unauthorized action 
-    end
-
-    User->>Ionos: User update this account
-    Ionos->>MongoDB: PUT /user/{id_user}
-    alt User
-    MongoDB-->>Ionos: Return port 200
-    Ionos-->>User: Account update
-    else another user
-    MongoDB-->>Ionos: Return port 401
-    Ionos-->>User: Unauthorized action 
+    alt Authorized User
+    MongoDB-->>Ionos: Return status 200
+    Ionos-->>User: Account updated
+    else Unauthorized User
+    MongoDB-->>Ionos: Return status 401
+    Ionos-->>User: Unauthorized action
     end
 ```
 
-### Host diagram
-``` mermaid 
+### **Host Interaction**
+
+```mermaid
 sequenceDiagram
     actor Host
     participant Ionos
     participant MongoDB
 
-    Host->>Ionos: Fetch all user
-    Ionos->>MongoDB: GET /user
-    MongoDB-->>Ionos: Return port 200
-    Ionos-->>Host: List of all user
+    Host->>Ionos: Fetch all users
+    Ionos->>MongoDB: GET /users
+    MongoDB-->>Ionos: Return status 200
+    Ionos-->>Host: List of all users
 
-    Host->>Ionos: Create a article
-    Ionos->>MongoDB: POST /article
-    alt article have all info
-    MongoDB-->>Ionos: Return port 201
-    Ionos-->>Host: Article created !
-    else article don't have all info
-    MongoDB-->>Ionos: Return port 400
+    Host->>Ionos: Create an article
+    Ionos->>MongoDB: POST /articles
+    alt Valid Request
+    MongoDB-->>Ionos: Return status 201
+    Ionos-->>Host: Article created!
+    else Invalid Request
+    MongoDB-->>Ionos: Return status 400
     Ionos-->>Host: Bad request
     end
 
-    Host->>Ionos: Modify a article
-    Ionos->>MongoDB: PUT /article/{id_article}
-    alt host
-    MongoDB-->>Ionos: Return port 200
-    Ionos-->>Host: Article has modified
-    else another host
-    MongoDB-->>Ionos: Return port 401
-    Ionos-->>Host: Unauthorized action 
-    end
-
-    host->>Ionos: create a activity in agenda
-    Ionos->>MongoDB: POST /agenda
-    alt article have all info
-    MongoDB-->>Ionos: Return port 200
-    Ionos-->>host: Article created !
-    else article don't have all info
-    MongoDB-->>Ionos: Return port 400
-    Ionos-->>host: Bad request
-    end
-
-    Host->>Ionos: Modify activity on agenda
-    Ionos->>MongoDB: PUT /article/{id_article}
-    alt host
-    MongoDB-->>Ionos: Return port 200
-    Ionos-->>Host: activity has modified
-    else another host
-    MongoDB-->>Ionos: Return port 401
-    Ionos-->>Host: Unauthorized action 
+    Host->>Ionos: Modify an article
+    Ionos->>MongoDB: PUT /articles/{id_article}
+    alt Authorized Host
+    MongoDB-->>Ionos: Return status 200
+    Ionos-->>Host: Article updated
+    else Unauthorized Host
+    MongoDB-->>Ionos: Return status 401
+    Ionos-->>Host: Unauthorized action
     end
 ```
 
@@ -245,10 +324,11 @@ sequenceDiagram
     MongoDB-->>Ionos: Return port 200
     Ionos-->>Admin: Event delete!
 ```
+---
 
-## Document External and Internal APIs
+# Document External and Internal APIs 🔗
 
-### **User part**
+### **User API**
 
 | **URL**  | **Method**      | **input** (json)                 | **Output** (json)  | Description|
 |------------|-----------------|---------------------------------|--------------|------------|
@@ -263,7 +343,7 @@ sequenceDiagram
 |api/event |GET||``{list of event}``| Get all event |
 |api/event/{id_event} |GET|``{id_event}``|``{event}``| Get a event with this id |
 
-### **Host and admin part**
+### **Host and admin API**
 
 | **URL**  | **Method**      | **input** (json)                 | **Output** (json)  | description|
 |------------|-----------------|---------------------------------|--------------|------------|
@@ -283,13 +363,93 @@ sequenceDiagram
 |api/admin/event/{id_event} |PUT|``{id_agenda, titre, description, date, image (optionnal)}``|``{message: "Your event are update !"}``|Admin modified the event |
 |api/admin/event/{id_event} |DELETE|``{id_agenda}``|``{message: "Your event are delete !"}``|  Admin delete the event|
 
+---
 
-## Plan SCM and QA Strategies
+# Plan SCM and QA Strategies 🛠️
+
+### **SCM Strategy**
+
+* **Version Control**: Git
+* **Branching Strategy**:
+
+  * `main`: Stable, production-ready code
+  * `development`: Integration branch for features/bug fixes
+  * `feature/*`: Feature branches for individual tasks
+  * `hotfix/*`: For urgent fixes
+* **Commit Guidelines**: Use a standardized format, e.g., `feat: Add feature` or `fix: Correct issue`
+
+### **Quality Assurance**
+
+* **Testing Types**:
+
+  * Unit Tests: Individual components (e.g., API endpoints)
+  * Integration Tests: Modules working together
+  * End-to-End Tests: User workflows
+  * Manual Tests: Critical user flows/UI validation
+ 
+* **SCM (Software Configuration Management)**:
+
+* Version Control: Git to manage project versioning.
+
+  * Branches:
+
+    * main: Production-ready code.
+
+    * test: Branch for ongoing integration and development.
+
+    * bryan/*, cyprien/*: Individual branches to develop specific features.
+
+    * test/*: Branches to quickly fix bugs in production.
+    
+    * Git Workflow: Use a methodology like GitFlow or GitHub Flow to structure collaborative development.
+      
+* **Unit Tests:**
+
+  * **Backend (Node.js):**
+    * **Jest**: Ideal for testing isolated JavaScript functions.  
+      * Example: Test REST API endpoints to ensure expected data is returned.  
+    * **Mocha + Chai**: Alternative for writing clear and understandable tests.
+
+  * **Frontend (HTML/CSS):**
+    * **W3C Validator**: Validate HTML syntax.  
+    * **stylelint**: Detect CSS style errors.
+
+* **Integration Tests:**
+
+  * **Backend (Node.js):**
+    * **Supertest + Jest**: Test API route integrations.  
+      * Example: Validate API calls interact correctly with the database.
+
+  * **Frontend:**
+    * **Postman**: Simulate API requests to test communication between frontend and backend.
+
+* **End-to-End (E2E) Tests:**
+
+  * **Tools:**
+    * **Cypress**: Best for testing complete user flows in simple web applications.  
+      * Example: Verify form submission and data transfer to the backend.  
+    * **Playwright/Puppeteer**: Alternatives for lightweight E2E testing.
+
+* **Environments:**
+
+  * **Test Environment:**
+    * Isolated Node.js server with a mock database (e.g., SQLite in memory or test MongoDB).  
+    * Local hosting for HTML/CSS files to test interactions.
+
+  * **Production Environment:**
+    * Ensure static code analysis using **ESLint** before deployment.  
+    * Monitor performance and errors with tools like **New Relic**.
 
 
-## Technical Justifications
+
+## Technical Justifications 🧐  
 
 We goes with a classique technologie for these raison :
-- Our client are a litle assiosiation
-- If the client recrute a developper web the web site need to be simple
-- 
+- Repaire des 2 Vallées is a small association, so we don't need a large hosting provider.
+- We use simple technology if the association is hiring developers.
+- Given the small number of possible users, we use a simple database.
+- We use Mango DB for the database because it's easy to use and configure, and our target audience is parents of children.
+- We use simple technologies like HTML, CSS, and Node.js to make it easier for another developer to take over in the future.
+- We use Git for version control because we need to be able to roll back and share work with other team members.
+- We use Ionos hosting because it was requested directly by the Repaire des 2 Vallées association.
+--- 
