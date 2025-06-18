@@ -2,7 +2,9 @@ const jwt = require('jsonwebtoken');
 
 module.exports = (req, res, next) => {
     try {
-        const token = req.cookies.token
+        console.log(req.headers.authorization)
+        const split = req.headers.authorization.split(" ")
+        const token = split[1]
         
         if (!token) {
             return res.status(401).json('No token has found');

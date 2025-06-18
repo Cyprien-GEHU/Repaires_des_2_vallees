@@ -1,8 +1,16 @@
+function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(';').shift();
+}
+
 document.querySelector('.form-section form').addEventListener('submit', async function (e) {
   e.preventDefault();
 
   const Title = document.getElementById('titre').value;
   const description = document.getElementById('contenu').value;
+  const token = getCookie('token');
+
 
   if (!Title || !description) {
     alert("Veuillez remplir tous les champs.");
@@ -13,7 +21,8 @@ document.querySelector('.form-section form').addEventListener('submit', async fu
     const response = await fetch('http://localhost:3000/admin/article', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
       },
       body: JSON.stringify({ Title, description })
     });
@@ -38,11 +47,13 @@ document.querySelectorAll('.form-section form')[1].addEventListener('submit', fu
   const id = document.getElementById('article-id').value;
   const Title = document.getElementById('nouveau-titre').value;
   const description = document.getElementById('nouveau-contenu').value;
+  const token = getCookie('token');
 
   fetch(`http://localhost:3000/admin/article/${id}`, {
     method: 'PUT',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
     },
     body: JSON.stringify({ Title, description })
   })
@@ -55,11 +66,13 @@ document.querySelectorAll('.form-section form')[2].addEventListener('submit', fu
   e.preventDefault();
 
   const id = document.getElementById('supprimer-id').value;
+  const token = getCookie('token');
 
   fetch(`http://localhost:3000/admin/article/${id}`, {
     method: 'DELETE',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
     }
   })
 });
