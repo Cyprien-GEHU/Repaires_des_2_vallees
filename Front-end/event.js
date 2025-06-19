@@ -6,33 +6,23 @@ document.addEventListener("DOMContentLoaded", () => {
     })
     .then(events => {
       const groupesParDate = {};
+      const moisFr = {
+        janvier: "01", février: "02", mars: "03", avril: "04", mai: "05", juin: "06",
+        juillet: "07", août: "08", septembre: "09", octobre: "10", novembre: "11", décembre: "12"
+      };
 
       events.forEach(evt => {
-        // Normalise les noms de mois en français/anglais
-        const moisFr = {
-          janvier: "01", février: "02", mars: "03", avril: "04", mai: "05", juin: "06",
-          juillet: "07", août: "08", septembre: "09", octobre: "10", novembre: "11", décembre: "12"
-        };
-
-        let dateStr = evt.day.trim();
-
-        // Si la date est en français
+        const dateStr = evt.day.trim();
         const matchFr = dateStr.match(/^(\d{1,2}) (\w+) (\d{4})$/);
-        const matchEn = dateStr.match(/^(\d{1,2}) (\w+) (\d{4})$/);
-
         let formattedDate;
 
         if (matchFr && moisFr[matchFr[2].toLowerCase()]) {
           const [_, jour, mois, annee] = matchFr;
           formattedDate = `${annee}-${moisFr[mois.toLowerCase()]}-${jour.padStart(2, '0')}`;
         } else {
-          // Fallback en anglais (si le mois est anglais ou inconnu)
-          formattedDate = new Date(dateStr);
-          if (isNaN(formattedDate)) {
-            console.warn("Date invalide pour l’événement :", evt);
-            return; // On saute cet event
-          }
-          formattedDate = formattedDate.toISOString().slice(0, 10); // YYYY-MM-DD
+          const tempDate = new Date(dateStr);
+          if (isNaN(tempDate)) return;
+          formattedDate = tempDate.toISOString().slice(0, 10);
         }
 
         if (!groupesParDate[formattedDate]) groupesParDate[formattedDate] = [];
@@ -48,32 +38,36 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const titre = document.createElement("h3");
         titre.textContent = `📅 ${new Date(date).toLocaleDateString("fr-FR", {
-          weekday: "long",
-          year: "numeric",
-          month: "long",
-          day: "numeric"
+          weekday: "long", year: "numeric", month: "long", day: "numeric"
         })}`;
-
         bloc.appendChild(titre);
 
+        const cardContainer = document.createElement("div");
+        cardContainer.className = "card-container"; // Ajoute un conteneur optionnel
+
         evts.forEach(evt => {
-          const div = document.createElement("div");
-          div.className = "event";
-          div.innerHTML = `
-            <h4>${evt.Title}</h4>
-            <p>${evt.description}</p>
-          `;
-          bloc.appendChild(div);
+          const card = document.createElement("div");
+          card.className = "card";
+
+          card.innerHTML = `
+  ${evt.picture ? `<img src="${evt.picture}" alt="${evt.Title}">` : ""}
+  <div class="card-body">
+    <h2>${evt.Title}</h2>
+    <p class="truncate">${evt.description}</p>
+  </div>
+`;
+
+
+          cardContainer.appendChild(card);
         });
 
+        bloc.appendChild(cardContainer);
         container.appendChild(bloc);
       });
     })
     .catch(err => {
       console.error("Erreur chargement événements :", err);
       const container = document.querySelector(".right");
-      if (container) {
-        container.innerHTML = `<p style="color:red;">Erreur de chargement des événements.</p>`;
-      }
+      container.innerHTML = `<p style="color:red;">Erreur de chargement des événements.</p>`;
     });
 });

@@ -1,4 +1,3 @@
-// Récupérer type et id depuis l'URL
 function getParams() {
   const params = new URLSearchParams(window.location.search);
   return {
@@ -11,13 +10,10 @@ const { type, id } = getParams();
 const form = document.getElementById('edit-form');
 const backLink = document.getElementById('back-link');
 
-// Définit le lien retour vers manage.html avec le bon type
 let typePlural = '';
 if (type === 'article') typePlural = 'articles';
 else if (type === 'event') typePlural = 'events';
 else if (type === 'agenda') typePlural = 'agenda';
-console.log('type avant transformation:', typePlural);
-console.log('type', type);
 
 backLink.href = `manage.html?type=${typePlural}`;
 
@@ -26,7 +22,6 @@ if (!type || !id) {
   throw new Error('Paramètres manquants');
 }
 
-// Fonction pour créer un champ label + input
 function createField(labelText, typeInput, name, value = '') {
   const wrapper = document.createElement('div');
 
@@ -37,13 +32,15 @@ function createField(labelText, typeInput, name, value = '') {
   let input;
   if (typeInput === 'textarea') {
     input = document.createElement('textarea');
+    input.value = value;
   } else {
     input = document.createElement('input');
     input.type = typeInput;
+    if (typeInput !== 'file') input.value = value;
   }
+
   input.id = name;
   input.name = name;
-  input.value = value;
 
   wrapper.appendChild(label);
   wrapper.appendChild(input);
@@ -51,7 +48,6 @@ function createField(labelText, typeInput, name, value = '') {
   return wrapper;
 }
 
-// Fonction pour créer un champ select pour les jours de la semaine
 function createSelectField(labelText, name, selectedValue = '') {
   const wrapper = document.createElement('div');
 
@@ -78,7 +74,6 @@ function createSelectField(labelText, name, selectedValue = '') {
   return wrapper;
 }
 
-// Charger les données existantes
 async function loadData() {
   let url = '';
 
@@ -98,19 +93,23 @@ async function loadData() {
     }
     const data = await res.json();
 
-    form.innerHTML = ''; // Vide le formulaire
+    form.innerHTML = '';
 
-    // Selon le type on injecte les champs
     if (type === 'article') {
       form.appendChild(createField('Titre', 'text', 'Title', data.Title));
       form.appendChild(createField('Description', 'textarea', 'description', data.description));
     } else if (type === 'event') {
       form.appendChild(createField('Titre', 'text', 'Title', data.title));
-      form.appendChild(createField('Date', 'date', 'date', data.date ? data.date.slice(0,10) : ''));
+      form.appendChild(createField('Date', 'date', 'date', data.date ? data.date.slice(0, 10) : ''));
       form.appendChild(createField('Description', 'textarea', 'description', data.description || ''));
     } else if (type === 'agenda') {
       form.appendChild(createField('Événement', 'text', 'Title', data.Title));
       form.appendChild(createSelectField('Jour', 'day', data.day));
+    }
+
+    // ➕ Champ image pour article et event
+    if (type === 'article' || type === 'event') {
+      form.appendChild(createField('Image (optionnelle)', 'file', 'image'));
     }
 
     const submitBtn = document.createElement('button');
@@ -124,27 +123,26 @@ async function loadData() {
   }
 }
 
-// Gestion de la soumission du formulaire
 form.addEventListener('submit', async e => {
   e.preventDefault();
 
+  const token = getCookie('token');
   const formData = new FormData(form);
-  let body = {};
+  const imageFile = document.getElementById('image')?.files[0];
 
-  for (const [key, value] of formData.entries()) {
-    body[key] = value;
+  if (!imageFile) {
+    formData.delete('image'); // Empêche l'envoi d'un champ vide
   }
 
   try {
-    const token = getCookie('token');
     const url = `http://localhost:3000/admin/${type}/${id}`;
     const res = await fetch(url, {
       method: 'PUT',
       headers: {
-        'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
+        // Ne pas définir Content-Type si on utilise FormData
       },
-      body: JSON.stringify(body)
+      body: formData
     });
 
     if (!res.ok) {
@@ -167,5 +165,4 @@ function getCookie(name) {
   if (parts.length === 2) return parts.pop().split(';').shift();
 }
 
-// Chargement initial
 loadData();

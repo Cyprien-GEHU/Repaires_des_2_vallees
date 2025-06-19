@@ -15,10 +15,8 @@ let typePlural = '';
 if (type === 'article') typePlural = 'articles';
 else if (type === 'event') typePlural = 'events';
 else if (type === 'agenda') typePlural = 'agenda';
-console.log(typePlural, type);
 
 backLink.href = `manage.html?type=${typePlural}`;
-
 
 if (!type) {
   form.innerHTML = '<p class="error-message">Type manquant dans l’URL.</p>';
@@ -49,6 +47,31 @@ function createField(labelText, typeInput, name) {
   return wrapper;
 }
 
+// Fonction pour créer un champ select avec les jours de la semaine
+function createDaySelect(labelText, name) {
+  const wrapper = document.createElement('div');
+
+  const label = document.createElement('label');
+  label.htmlFor = name;
+  label.textContent = labelText;
+
+  const select = document.createElement('select');
+  select.name = name;
+  select.id = name;
+
+  const jours = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi'];
+  jours.forEach(jour => {
+    const option = document.createElement('option');
+    option.value = jour;
+    option.textContent = jour.charAt(0).toUpperCase() + jour.slice(1);
+    select.appendChild(option);
+  });
+
+  wrapper.appendChild(label);
+  wrapper.appendChild(select);
+  return wrapper;
+}
+
 // Créer les champs dynamiquement selon le type
 if (type === 'article') {
   form.appendChild(createField('Titre', 'text', 'Title'));
@@ -58,11 +81,28 @@ if (type === 'article') {
   form.appendChild(createField('Date', 'date', 'day'));
   form.appendChild(createField('Description', 'textarea', 'description'));
 } else if (type === 'agenda') {
-  form.appendChild(createField('Événement', 'text', 'event'));
-  form.appendChild(createField('Date', 'date', 'date'));
+  form.appendChild(createField('Événement', 'text', 'Title'));
+  form.appendChild(createField('Price', 'number', 'price'));
+  form.appendChild(createDaySelect('Jour de la semaine', 'day'));
 } else {
   form.innerHTML = '<p class="error-message">Type invalide.</p>';
   throw new Error('Type invalide');
+}
+
+// ➕ Champ image (pour article et event uniquement)
+if (type === 'article' || type === 'event') {
+  const wrapper = document.createElement('div');
+  const label = document.createElement('label');
+  label.htmlFor = 'image';
+  label.textContent = 'Image (optionnelle)';
+  const input = document.createElement('input');
+  input.type = 'file';
+  input.name = 'image';
+  input.id = 'image';
+  input.accept = 'image/*';
+  wrapper.appendChild(label);
+  wrapper.appendChild(input);
+  form.appendChild(wrapper);
 }
 
 // Bouton de soumission
@@ -75,22 +115,25 @@ form.appendChild(submitBtn);
 form.addEventListener('submit', async e => {
   e.preventDefault();
 
+  const token = getCookie('token');
+  const imageFile = document.getElementById('image')?.files[0];
   const formData = new FormData(form);
-  let body = {};
-  for (const [key, value] of formData.entries()) {
-    body[key] = value;
+
+  // Si pas d'image, supprimer le champ vide
+  if (!imageFile) {
+    formData.delete('image');
   }
 
   try {
-    const token = getCookie('token');
-    const res = await fetch(`http://localhost:3000/admin/${type}`, {
+    const options = {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
       },
-      body: JSON.stringify(body)
-    });
+      body: formData
+    };
+
+    const res = await fetch(`http://localhost:3000/admin/${type}`, options);
 
     if (!res.ok) {
       const error = await res.json();

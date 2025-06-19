@@ -1,7 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const container = document.getElementById("programme-container");
+  const boutonsContainer = document.getElementById("jour-buttons");
+  const cardsContainer = document.getElementById("programme-cards");
 
-  fetch("http://localhost:3000/agenda/") // adapte l'URL si besoin
+  fetch("http://localhost:3000/agenda/")
     .then((response) => {
       if (!response.ok) {
         throw new Error("Erreur lors de la récupération du programme");
@@ -10,52 +11,70 @@ document.addEventListener("DOMContentLoaded", () => {
     })
     .then((data) => {
       if (!data.length) {
-        container.innerHTML = "<p>Aucun programme disponible pour le moment.</p>";
+        cardsContainer.innerHTML = "<p>Aucun programme disponible pour le moment.</p>";
         return;
       }
 
-      // Ordre fixe des jours
       const joursOrdre = ["lundi", "mardi", "mercredi", "jeudi", "vendredi"];
-
-      // Groupe les événements par jour
       const grouped = {};
 
+      // Regrouper les activités par jour
       data.forEach(item => {
-        const jour = item.day.toLowerCase(); // ex: lundi, mardi
+        const jour = item.day.toLowerCase();
         if (!grouped[jour]) {
           grouped[jour] = [];
         }
-        grouped[jour].push(item.event);
+        grouped[jour].push(item);
       });
 
-      // Affiche les jours dans l'ordre
+      // Créer les boutons des jours
       joursOrdre.forEach(jour => {
-        const jourBlock = document.createElement("div");
-        jourBlock.classList.add("programme-jour"); // Card stylisée
+        const btn = document.createElement("button");
+        btn.textContent = jour.charAt(0).toUpperCase() + jour.slice(1);
+        btn.addEventListener("click", () => {
+          document.querySelectorAll(".jour-buttons button").forEach(b => b.classList.remove("active"));
+          btn.classList.add("active");
+          afficherCartes(grouped[jour] || [], jour);
+        });
+        boutonsContainer.appendChild(btn);
+      });
 
-        const titre = document.createElement("h3");
-        titre.textContent = jour.charAt(0).toUpperCase() + jour.slice(1); // Majuscule
+      // Affiche automatiquement le premier jour
+      if (joursOrdre.length > 0) {
+        boutonsContainer.querySelector("button").click();
+      }
 
-        const liste = document.createElement("ul");
+      // Fonction pour afficher les cartes d'activité
+      function afficherCartes(activites, jour) {
+        cardsContainer.innerHTML = "";
 
-        if (grouped[jour] && grouped[jour].length) {
-          grouped[jour].forEach((act) => {
-            const li = document.createElement("li");
-            li.textContent = act;
-            liste.appendChild(li);
-          });
-        } else {
-          const li = document.createElement("li");
-          li.textContent = "Aucune activité prévue.";
-          liste.appendChild(li);
+        if (!activites.length) {
+          cardsContainer.innerHTML = `<p>Aucune activité prévue pour le ${jour}.</p>`;
+          return;
         }
 
-        jourBlock.appendChild(titre);
-        jourBlock.appendChild(liste);
-        container.appendChild(jourBlock);
-      });
+        activites.forEach(act => {
+          const card = document.createElement("div");
+          card.classList.add("card-activite");
+
+          const titre = document.createElement("h4");
+          titre.textContent = act.Title;
+
+          const description = document.createElement("p");
+          description.textContent = act.description || "Aucune description disponible.";
+
+          const prix = document.createElement("p");
+          prix.textContent = `Prix : ${act.price || "non renseigné"}`;
+
+          card.appendChild(titre);
+          card.appendChild(description);
+          card.appendChild(prix);
+
+          cardsContainer.appendChild(card);
+        });
+      }
     })
     .catch((error) => {
-      container.innerHTML = `<p>Erreur : ${error.message}</p>`;
+      cardsContainer.innerHTML = `<p>Erreur : ${error.message}</p>`;
     });
 });
