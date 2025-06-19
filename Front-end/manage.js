@@ -4,8 +4,14 @@ function getTypeFromUrl() {
   return params.get('type') || 'articles';
 }
 
+
 const type = getTypeFromUrl();
+let typePlural = '';
+if (type === 'articles') typePlural = 'article';
+else if (type === 'events') typePlural = 'event';
+else if (type === 'agenda') typePlural = 'agenda';
 const addButton = document.getElementById('add-button');
+console.log('Type récupéré :', type, 'Type pluriel :', typePlural);
 
 if (type === 'articles' || type === 'events' || type === 'agenda') {
   const typeForCreate = type === 'articles' ? 'article' : type === 'events' ? 'event' : 'agenda';
@@ -61,7 +67,7 @@ function createItemElement(item) {
   editBtn.classList.add('edit-btn');
   editBtn.addEventListener('click', () => {
     // Redirection vers la page d'édition avec id et type
-    window.location.href = `edit.html?type=${type}&id=${item._id}`;
+    window.location.href = `edit.html?type=${typePlural}&id=${item._id}`;
   });
 
   const deleteBtn = document.createElement('button');

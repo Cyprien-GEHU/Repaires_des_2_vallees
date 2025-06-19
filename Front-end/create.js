@@ -11,7 +11,14 @@ const form = document.getElementById('create-form');
 const backLink = document.getElementById('back-link');
 
 // Lien de retour vers la page manage
-backLink.href = `manage.html?type=${type}`;
+let typePlural = '';
+if (type === 'article') typePlural = 'articles';
+else if (type === 'event') typePlural = 'events';
+else if (type === 'agenda') typePlural = 'agenda';
+console.log(typePlural, type);
+
+backLink.href = `manage.html?type=${typePlural}`;
+
 
 if (!type) {
   form.innerHTML = '<p class="error-message">Type manquant dans l’URL.</p>';
@@ -47,8 +54,8 @@ if (type === 'article') {
   form.appendChild(createField('Titre', 'text', 'Title'));
   form.appendChild(createField('Description', 'textarea', 'description'));
 } else if (type === 'event') {
-  form.appendChild(createField('Titre', 'text', 'title'));
-  form.appendChild(createField('Date', 'date', 'date'));
+  form.appendChild(createField('Titre', 'text', 'Title'));
+  form.appendChild(createField('Date', 'date', 'day'));
   form.appendChild(createField('Description', 'textarea', 'description'));
 } else if (type === 'agenda') {
   form.appendChild(createField('Événement', 'text', 'event'));
@@ -92,7 +99,7 @@ form.addEventListener('submit', async e => {
     }
 
     alert('Création réussie !');
-    window.location.href = `manage.html?type=${type}`;
+    window.location.href = `manage.html?type=${typePlural}`;
   } catch (err) {
     console.error(err);
     alert('Erreur réseau lors de la création.');

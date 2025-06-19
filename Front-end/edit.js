@@ -13,10 +13,12 @@ const backLink = document.getElementById('back-link');
 
 // Définit le lien retour vers manage.html avec le bon type
 let typePlural = '';
-if (type === 'articles') typePlural = 'articles';
-else if (type === 'events') typePlural = 'events';
-else if (type === 'agenda') typePlural = 'agenda'; // pas de changement ici
-console.log('type avant transformation:', type);
+if (type === 'article') typePlural = 'articles';
+else if (type === 'event') typePlural = 'events';
+else if (type === 'agenda') typePlural = 'agenda';
+console.log('type avant transformation:', typePlural);
+console.log('type', type);
+
 
 backLink.href = `manage.html?type=${typePlural}`;
 
@@ -74,11 +76,11 @@ async function loadData() {
     form.innerHTML = ''; // Vide le formulaire
 
     // Selon le type on injecte les champs
-    if (type === 'articles') {
+    if (type === 'article') {
       form.appendChild(createField('Titre', 'text', 'Title', data.Title));
       form.appendChild(createField('Description', 'textarea', 'description', data.description));
       // Optionnel : ajout upload image si tu veux
-    } else if (type === 'events') {
+    } else if (type === 'event') {
       form.appendChild(createField('Titre', 'text', 'title', data.title));
       form.appendChild(createField('Date', 'date', 'date', data.date ? data.date.slice(0,10) : ''));
       form.appendChild(createField('Description', 'textarea', 'description', data.description || ''));

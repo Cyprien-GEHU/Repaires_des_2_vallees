@@ -1,6 +1,6 @@
 // articles.js
 window.addEventListener('DOMContentLoaded', () => {
-  fetch('http://localhost:3000/articles')
+  fetch('http://localhost:3000/article')
     .then(res => res.json())
     .then(articles => {
       const container = document.querySelector('.articles');
@@ -15,7 +15,7 @@ window.addEventListener('DOMContentLoaded', () => {
           <div class="card-body">
             <h2>${article.Title}</h2>
             <p>${article.description}</p>
-            <a href="article.html?id=${article._id}">Lire plus</a>
+            <a href="gestion.html?id=${article._id}">Lire plus</a>
           </div>
         `;
 
