@@ -101,3 +101,56 @@ iframe {
   max-width: 1200px;
   margin: 0 auto;
 }
+#programme-semaine {
+  margin-top: 30px;
+}
+
+#programme-semaine h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #2b593e;
+}
+
+#programme-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.programme-jour {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 250px;
+  min-height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.programme-jour h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 20px;
+  color: #2b593e;
+  text-align: center;
+}
+
+.programme-jour ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.programme-jour li {
+  padding: 6px 0;
+  border-bottom: 1px solid #eee;
+  color: #333;
+}
+
+.programme-jour li:last-child {
+  border-bottom: none;
+}

@@ -19,9 +19,7 @@ else if (type === 'agenda') typePlural = 'agenda';
 console.log('type avant transformation:', typePlural);
 console.log('type', type);
 
-
 backLink.href = `manage.html?type=${typePlural}`;
-
 
 if (!type || !id) {
   form.innerHTML = '<p class="error-message">Paramètres manquants.</p>';
@@ -53,6 +51,33 @@ function createField(labelText, typeInput, name, value = '') {
   return wrapper;
 }
 
+// Fonction pour créer un champ select pour les jours de la semaine
+function createSelectField(labelText, name, selectedValue = '') {
+  const wrapper = document.createElement('div');
+
+  const label = document.createElement('label');
+  label.htmlFor = name;
+  label.textContent = labelText;
+
+  const select = document.createElement('select');
+  select.id = name;
+  select.name = name;
+
+  const days = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi'];
+  days.forEach(day => {
+    const option = document.createElement('option');
+    option.value = day;
+    option.textContent = day.charAt(0).toUpperCase() + day.slice(1);
+    if (day === selectedValue) option.selected = true;
+    select.appendChild(option);
+  });
+
+  wrapper.appendChild(label);
+  wrapper.appendChild(select);
+
+  return wrapper;
+}
+
 // Charger les données existantes
 async function loadData() {
   let url = '';
@@ -79,14 +104,13 @@ async function loadData() {
     if (type === 'article') {
       form.appendChild(createField('Titre', 'text', 'Title', data.Title));
       form.appendChild(createField('Description', 'textarea', 'description', data.description));
-      // Optionnel : ajout upload image si tu veux
     } else if (type === 'event') {
-      form.appendChild(createField('Titre', 'text', 'title', data.title));
+      form.appendChild(createField('Titre', 'text', 'Title', data.title));
       form.appendChild(createField('Date', 'date', 'date', data.date ? data.date.slice(0,10) : ''));
       form.appendChild(createField('Description', 'textarea', 'description', data.description || ''));
     } else if (type === 'agenda') {
-      form.appendChild(createField('Événement', 'text', 'event', data.event));
-      form.appendChild(createField('Date', 'date', 'date', data.date ? data.date.slice(0,10) : ''));
+      form.appendChild(createField('Événement', 'text', 'Title', data.Title));
+      form.appendChild(createSelectField('Jour', 'day', data.day));
     }
 
     const submitBtn = document.createElement('button');
@@ -104,7 +128,6 @@ async function loadData() {
 form.addEventListener('submit', async e => {
   e.preventDefault();
 
-  // Récupérer les données du formulaire
   const formData = new FormData(form);
   let body = {};
 
@@ -131,8 +154,7 @@ form.addEventListener('submit', async e => {
     }
 
     alert('Modification réussie !');
-    // Retour à la page gestion
-    window.location.href = `manage.html?type=${type}`;
+    window.location.href = `manage.html?type=${typePlural}`;
   } catch (err) {
     console.error(err);
     alert('Erreur réseau lors de la modification.');

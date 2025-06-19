@@ -14,19 +14,41 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      data.forEach(jour => {
+      // Ordre fixe des jours
+      const joursOrdre = ["lundi", "mardi", "mercredi", "jeudi", "vendredi"];
+
+      // Groupe les événements par jour
+      const grouped = {};
+
+      data.forEach(item => {
+        const jour = item.day.toLowerCase(); // ex: lundi, mardi
+        if (!grouped[jour]) {
+          grouped[jour] = [];
+        }
+        grouped[jour].push(item.event);
+      });
+
+      // Affiche les jours dans l'ordre
+      joursOrdre.forEach(jour => {
         const jourBlock = document.createElement("div");
-        jourBlock.classList.add("jour-block");
+        jourBlock.classList.add("programme-jour"); // Card stylisée
 
         const titre = document.createElement("h3");
-        titre.textContent = jour.jour;
+        titre.textContent = jour.charAt(0).toUpperCase() + jour.slice(1); // Majuscule
 
         const liste = document.createElement("ul");
-        jour.activites.forEach((act) => {
+
+        if (grouped[jour] && grouped[jour].length) {
+          grouped[jour].forEach((act) => {
+            const li = document.createElement("li");
+            li.textContent = act;
+            liste.appendChild(li);
+          });
+        } else {
           const li = document.createElement("li");
-          li.textContent = act;
+          li.textContent = "Aucune activité prévue.";
           liste.appendChild(li);
-        });
+        }
 
         jourBlock.appendChild(titre);
         jourBlock.appendChild(liste);

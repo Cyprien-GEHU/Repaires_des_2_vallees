@@ -50,8 +50,8 @@ function createItemElement(item) {
     `;
   } else if (type === 'agenda') {
     innerHTML = `
-      <h3>${item.event}</h3>
-      <p><strong>Date :</strong> ${new Date(item.date).toLocaleDateString()}</p>
+      <h3>${item.Title}</h3>
+      <p><strong>Date :</strong> ${item.day}</p>
       <p><strong>ID :</strong> ${item._id}</p>
     `;
   }
