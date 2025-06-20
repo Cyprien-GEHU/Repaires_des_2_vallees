@@ -1,11 +1,14 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const routeUsers = require('./route/user')
-const routeAdmin = require('./route/admin')
-const routeArticle = require('./route/article')
-const routeAgenda = require('./route/agenda')
-const routeEvent = require('./route/event')
-
+const cookieParser = require('cookie-parser');
+const path = require('path');
+const routeUsers = require('./route/user');
+const routeAdmin = require('./route/admin');
+const routeArticle = require('./route/article');
+const routeAgenda = require('./route/agenda');
+const routeEvent = require('./route/event');
+const routeAuth = require('./route/auth');
+const cors = require('cors');
 // connection to the database
 mongoose.connect('mongodb+srv://cyprien:5XbthZG8XDORheLQ@cluster0.afcgulg.mongodb.net/repaire_des_2_vallées?retryWrites=true&w=majority&appName=Cluster0')
     .then(() => {console.log('connection reussi')})
@@ -22,11 +25,17 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use(express.json());
+app.use(cookieParser());
+app.use(cors());
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/users', routeUsers);
 app.use('/admin', routeAdmin);
 app.use('/article', routeArticle);
 app.use('/agenda', routeAgenda);
 app.use('/event', routeEvent);
+app.use('/auth', require('./route/auth'));
+
 
 // Specify the port to listen on
 const port = 3000;

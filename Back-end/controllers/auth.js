@@ -3,7 +3,7 @@ const admin = require('../models/admin');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-exports.signin = (req, res, next) => {
+exports.signin = (req, res) => {
     bcrypt.hash(req.body.password, 3, (err, password) => {
         if (err) {
             // Handle error
@@ -24,7 +24,7 @@ exports.signin = (req, res, next) => {
     });
 }
 
-exports.login = (req, res, next) => {
+exports.login = (req, res) => {
     admin.findOne({email: req.body.email})
         .then(post => {
             if (!post) {
@@ -39,4 +39,9 @@ exports.login = (req, res, next) => {
                     res.cookie("token", token, {httpOnly: true}).status(200).json({token: token})
             });
     })
+}
+
+exports.logout = (req, res) => {
+    res.clearCookie('token');
+    res.status(200).json({message: "logout succes"})
 }

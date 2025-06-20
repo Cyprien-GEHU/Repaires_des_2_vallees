@@ -1,5 +1,4 @@
 const agenda = require('../models/agenda')
-const jwt = require('jsonwebtoken');
 
 exports.get_agenda = (req, res) => {
   agenda.find()
@@ -11,6 +10,7 @@ exports.get_OneAgenda = (req, res) => {
   const url = req.url;
   const split = url.split("/");
   const id = split[1];
+
   agenda.findOne({_id: id})
     .then(post => {res.status(200).json(post)})
     .catch(error => res.status(400).json({ error }));
@@ -33,10 +33,11 @@ exports.create_agenda = (req, res) => {
     day: req.body.day,
     price: req.body.price
   })
+
   console.log(newAgenda)
   newAgenda.save()
     .then(() => res.status(201).json({ message: 'agenda créé !' }))
-    .catch(error => res.status(400).json({ error }));
+    .catch(error => res.status(400).json({ message: "création impossible" }));
 }
 
 exports.update_agenda = (req, res) => {
