@@ -1,0 +1,275 @@
+*, *::before, *::after { 
+  box-sizing: border-box; 
+  margin: 0; 
+  padding: 0; 
+}
+
+body { 
+  font-family: 'Segoe UI', sans-serif; 
+  background: #fafafa; 
+  color: #333; 
+}
+
+header { 
+  display: flex;
+  justify-content: space-between;
+  align-items: center; 
+  padding: 1rem 2rem; 
+  border-bottom: 4px solid #00cc00; 
+  background: #fff; 
+}
+
+header img { 
+  height: 60px; 
+}
+
+.btns a {
+  margin-left: 1rem;
+  padding: 0.6rem 1.2rem;
+  background: #43a047;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: background 0.3s;
+}
+
+h1 { 
+  text-align: center; 
+  margin: 2rem 0; 
+  font-size: 2.5rem; 
+  color: #006600; 
+}
+
+.content {
+  display: flex; 
+  flex-wrap: wrap; 
+  justify-content: center;
+  gap: 2rem; 
+  padding: 2rem;
+}
+
+.left, .right {
+  border-radius: 12px; 
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  padding: 1.5rem; 
+  flex: 1 1 300px;
+}
+
+.left {
+  border-left: 6px solid #00b300;
+  background: #eafce8;
+  padding: 1.5rem 2rem;
+  border-radius: 12px;
+  font-size: 1.2rem;
+  color: #1a451a;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+iframe {
+  width: 100%; 
+  aspect-ratio: 16/9;
+  border-radius: 8px; 
+  border: none;
+}
+
+.agenda {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  border-left: 4px solid #00cc00;
+}
+
+.agenda p { 
+  margin-bottom: 0.5rem; 
+}
+
+@media(max-width: 768px){
+  .content { 
+    flex-direction: column; 
+  }
+}
+.top {
+  width: 100%;
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+}
+.content {
+  display: block; /* au lieu de flex */
+  padding: 0 2rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+#programme-semaine {
+  margin-top: 30px;
+}
+
+#programme-semaine h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #2b593e;
+}
+
+#programme-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.programme-jour {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 250px;
+  min-height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.programme-jour h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 20px;
+  color: #2b593e;
+  text-align: center;
+}
+
+.programme-jour ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.programme-jour li {
+  padding: 6px 0;
+  border-bottom: 1px solid #eee;
+  color: #333;
+}
+
+.programme-jour li:last-child {
+  border-bottom: none;
+}
+.jour-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 25px;
+}
+
+.jour-buttons button {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.jour-buttons button:hover {
+  background-color: #45a049;
+}
+
+.jour-buttons button.active {
+  background-color: #2e7d32;
+}
+
+.programme-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.card-activite {
+  background-color: #ffffff;
+  border: 1px solid #dcdcdc;
+  border-radius: 8px;
+  padding: 20px;
+  width: 280px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+}
+
+.card-activite:hover {
+  transform: translateY(-5px);
+}
+
+.card-activite h4 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 1.2em;
+  color: #2e7d32;
+}
+
+.card-activite p {
+  margin: 5px 0;
+  color: #333;
+}
+.jour-buttons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.jour-buttons button {
+  padding: 10px 18px;
+  background-color: #43a047;
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.jour-buttons button:hover {
+  background-color: #388e3c;
+}
+
+.jour-buttons button.active {
+  background-color: #2e7d32;
+}
+
+.programme-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  padding: 10px 0;
+}
+
+.card-activite {
+  background: #ffffff;
+  border: 1px solid #dcdcdc;
+  padding: 20px;
+  width: 260px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+}
+
+.card-activite:hover {
+  transform: translateY(-4px);
+}
+
+.card-activite h4 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+  color: #2e7d32;
+}
+
+.card-activite p {
+  margin: 5px 0;
+  color: #444;
+  font-size: 0.95rem;
+}

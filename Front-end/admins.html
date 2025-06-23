@@ -1,91 +1,26 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Administration - Repaire des 2 Vallées</title>
-  <link rel="stylesheet" href="admin.css">
+  <link rel="stylesheet" href="css/admin.css" />
 </head>
 <body>
-
-<header>
-  <img src="logo.png" alt="Logo">
-  <h1>Administration - Repaire des 2 Vallées</h1>
-  <div class="btns">
+  <header>
+    <img src="logo.png" alt="Logo" />
+    <div class="btns">
       <a href="acceuil.html">Accueil</a>
-  </div>
-</header>
+    </div>
+  </header>
 
-<div class="admin-container">
+  <h1>Administration Repaire des 2 Vallées</h1>
 
-  <!-- Section ajout d'article -->
-  <div class="form-section">
-    <h2>Ajouter un Article</h2>
-    <form>
-      <label for="titre">Titre de l'article</label>
-      <input type="text" id="titre" name="titre">
+  <main class="admin-main">
+    <button id="btn-articles">Voir tous les articles</button>
+    <button id="btn-events">Voir tous les événements</button>
+    <button id="btn-agenda">Voir l'agenda</button>
+  </main>
 
-      <label for="image">Image</label>
-      <input type="file" id="image" name="image">
-
-      <label for="contenu">Contenu</label>
-      <textarea id="contenu" name="contenu" rows="5"></textarea>
-
-      <button type="submit">Publier</button>
-    </form>
-  </div>
-
-  <!-- Section modification d'article -->
-  <div class="form-section">
-    <h2>Modifier un Article</h2>
-    <form>
-      <label for="article-id">ID de l'article</label>
-      <input type="text" id="article-id" name="article-id">
-
-      <label for="nouveau-titre">Nouveau Titre</label>
-      <input type="text" id="nouveau-titre" name="nouveau-titre">
-
-      <label for="nouvelle-image">Nouvelle Image</label>
-      <input type="file" id="nouvelle-image" name="nouvelle-image">
-
-      <label for="nouveau-contenu">Nouveau Contenu</label>
-      <textarea id="nouveau-contenu" name="nouveau-contenu" rows="5"></textarea>
-
-      <button type="submit">Mettre à jour</button>
-    </form>
-  </div>
-
-  <!-- Section suppression d'article -->
-  <div class="form-section">
-    <h2>Supprimer un Article</h2>
-    <form>
-      <label for="supprimer-id">ID de l'article à supprimer</label>
-      <input type="text" id="supprimer-id" name="supprimer-id">
-
-      <button type="submit">Supprimer</button>
-    </form>
-  </div>
-
-  <!-- Section agenda -->
-  <div class="agenda-section">
-    <h2>Modifier l'Agenda</h2>
-    <form>
-      <label for="date">Date de l'événement</label>
-      <input type="date" id="date" name="date">
-
-      <label for="event">Description</label>
-      <input type="text" id="event" name="event">
-
-      <button type="submit">Ajouter à l'agenda</button>
-    </form>
-  </div>
-</div>
-
-<div class="get-articles" style="padding: 30px;">
-  <h2>Articles</h2>
-  <button id="load-articles">Charger les articles</button>
-  <ul id="articles-list"></ul>
-</div>
-
-<script src="admin.js"></script>
+  <script src="script/admin.js"></script>
 </body>
 </html>
