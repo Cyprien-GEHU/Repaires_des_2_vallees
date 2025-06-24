@@ -9,14 +9,13 @@ const routeAgenda = require('./route/agenda');
 const routeEvent = require('./route/event');
 const routeAuth = require('./route/auth');
 const cors = require('cors');
+
 // connection to the database
 mongoose.connect('mongodb+srv://cyprien:5XbthZG8XDORheLQ@cluster0.afcgulg.mongodb.net/repaire_des_2_vallées?retryWrites=true&w=majority&appName=Cluster0')
     .then(() => {console.log('connection reussi')})
     .catch(() => console.log('connexion failed'));
 
 const app = express();
-
-
 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');

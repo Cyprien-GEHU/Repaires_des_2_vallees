@@ -39,7 +39,8 @@ exports.create_article = (req, res) => {
     Title: req.body.Title,
     description: req.body.description,
     creator: req.userId,
-    picture: imageUrl
+    picture: imageUrl,
+    categorie: req.body.categorie
   })
 
   console.log(newArticle)
@@ -65,7 +66,8 @@ exports.update_article = (req, res) => {
         $set: {
           Title: req.body.Title,
           description: req.body.description,
-          picture: imageUrl
+          picture: imageUrl,
+          categorie: req.body.categorie
         }})
         .then(() => {
           if (post.picture) {
