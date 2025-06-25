@@ -1,0 +1,114 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: white;
+  color: #333;
+  margin: 0;
+}
+
+header {
+  background-color: #4CAF50;
+  color: white;
+  padding: 2rem 1rem;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.logo img {
+  height: 60px; /* Ajuste selon la taille souhaitée */
+}
+
+.header-content h1 {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  font-size: 1.8rem;
+  white-space: nowrap;
+}
+
+
+.container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+h2 {
+  color: #4CAF50;
+  margin-top: 2rem;
+}
+
+.contact-item {
+  background: #f1f1f1;
+  border: 1px solid #ccc;
+  padding: 0.75rem;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+}
+
+.contact-item:hover {
+  background: #e0f7e9;
+}
+
+.pdf-list li {
+  margin-bottom: 0.5rem;
+}
+
+.pdf-list a {
+  color: #4CAF50;
+  text-decoration: none;
+}
+
+.pdf-list a:hover {
+  text-decoration: underline;
+}
+.contact-group {
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.contact-name {
+  background-color: #f1f1f1;
+  padding: 0.75rem;
+  cursor: pointer;
+  font-weight: bold;
+  color: #333;
+}
+
+.contact-name:hover {
+  background-color: #e0f7e9;
+}
+
+.contact-info {
+  display: none;
+  background-color: #fff;
+  border-top: 1px solid #ccc;
+  padding: 0.75rem;
+}
+
+.contact-info div {
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+}
+
+.contact-info div:hover {
+  background-color: #f9f9f9;
+}
+.btns a {
+  background: #43a047;
+  color: white;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: background 0.3s;
+}
+
+.btns a:hover {
+  background: #2e7d32;
+}

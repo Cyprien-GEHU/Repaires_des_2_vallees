@@ -47,6 +47,32 @@ function createField(labelText, typeInput, name) {
   return wrapper;
 }
 
+// Fonction pour créer un champ select pour les catégories
+function createCategorySelect(labelText, name) {
+  const wrapper = document.createElement('div');
+
+  const label = document.createElement('label');
+  label.htmlFor = name;
+  label.textContent = labelText;
+
+  const select = document.createElement('select');
+  select.name = name;
+  select.id = name;
+
+  const categories = ['3-6 ans', '6-12 ans', '12-18 ans', 'periscolaire'];
+  categories.forEach(cat => {
+    const option = document.createElement('option');
+    option.value = cat;
+    option.textContent = cat;
+    select.appendChild(option);
+  });
+
+  wrapper.appendChild(label);
+  wrapper.appendChild(select);
+  return wrapper;
+}
+
+
 // Fonction pour créer un champ select avec les jours de la semaine
 function createDaySelect(labelText, name) {
   const wrapper = document.createElement('div');
@@ -76,10 +102,12 @@ function createDaySelect(labelText, name) {
 if (type === 'article') {
   form.appendChild(createField('Titre', 'text', 'Title'));
   form.appendChild(createField('Description', 'textarea', 'description'));
+  form.appendChild(createField('Catégorie', 'categorie'));
 } else if (type === 'event') {
   form.appendChild(createField('Titre', 'text', 'Title'));
   form.appendChild(createField('Date', 'date', 'day'));
   form.appendChild(createField('Description', 'textarea', 'description'));
+  form.appendChild(createField('Catégorie', 'text', 'categorie'));
 } else if (type === 'agenda') {
   form.appendChild(createField('Événement', 'text', 'Title'));
   form.appendChild(createField('Price', 'number', 'price'));
