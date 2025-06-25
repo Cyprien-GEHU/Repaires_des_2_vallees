@@ -30,10 +30,7 @@ exports.get_OneArticleAdmin = (req, res) => {
 
 
 exports.create_article = (req, res) => {
-  let imageUrl;
-  if (req.file) {
-    imageUrl = `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`;
-  }
+  imageUrl = `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`;
 
   const newArticle = new article({
     Title: req.body.Title,
@@ -55,13 +52,15 @@ exports.update_article = (req, res) => {
   const id = split[2];
   let imageUrl;
 
-  if (req.file) {
-    imageUrl = `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`;
-  }
-
   article.findOne({_id: id})
     .then(post => {
       if (post.creator[0] == req.userId || req.userRole == "admin") {
+        if (req.file) {
+          imageUrl = `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`;
+        }
+        else {
+          imageUrl = post.picture;
+        }
         article.updateOne({ _id: id }, { 
         $set: {
           Title: req.body.Title,
