@@ -102,7 +102,7 @@ function createDaySelect(labelText, name) {
 if (type === 'article') {
   form.appendChild(createField('Titre', 'text', 'Title'));
   form.appendChild(createField('Description', 'textarea', 'description'));
-  form.appendChild(createField('Catégorie', 'categorie'));
+  form.appendChild(createField('Catégorie', 'text', 'categorie'));
 } else if (type === 'event') {
   form.appendChild(createField('Titre', 'text', 'Title'));
   form.appendChild(createField('Date', 'date', 'day'));
@@ -170,7 +170,7 @@ form.addEventListener('submit', async e => {
     }
 
     alert('Création réussie !');
-    window.location.href = `manage.html?type=${typePlural}`;
+    //window.location.href = `manage.html?type=${typePlural}`;
   } catch (err) {
     console.error(err);
     alert('Erreur réseau lors de la création.');

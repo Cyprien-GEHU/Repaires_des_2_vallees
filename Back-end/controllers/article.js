@@ -31,6 +31,7 @@ exports.get_OneArticleAdmin = (req, res) => {
 
 exports.create_article = (req, res) => {
   imageUrl = `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`;
+  console.log(req.body)
 
   const newArticle = new article({
     Title: req.body.Title,
