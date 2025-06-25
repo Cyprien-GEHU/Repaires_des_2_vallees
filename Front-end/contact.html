@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Contact – Repaire des 2 Vallées</title>
+  <link rel="stylesheet" href="css/contact.css">
+</head>
+<body>
+<header>
+  <div class="header-content">
+    <div class="logo">
+      <img src="/images/logo_repaires.png" alt="Logo" />
+    </div>
+    <h1>Repaire des 2 Vallées</h1>
+    <div class="btns">
+      <a href="acceuil.html">Accueil</a>
+    </div>
+  </div>
+</header>
+
+
+  <main class="container">
+    <h2>Contact</h2>
+
+    <section class="contacts">
+      <div class="contact-group">
+        <div class="contact-name" onclick="toggleContact('president')">👤 Contact Repaire des 2 Vallées</div>
+        <div class="contact-info" id="president">
+          <div onclick="copyText('president-email')">
+            <strong>Email :</strong> <span id="president-email">repairedes2vallees@gmail.com</span>
+          </div>
+          <div onclick="copyText('president-phone')">
+            <p><strong>Téléphone Fixe :</strong> <span id="president-phone">05 65 14 08 25</span></p>
+          </div>
+          <div onclick="copyText('president-mobile')">
+            <p><strong>Téléphone :</strong> <span id="president-phone">06 33 41 38 13</span></p>
+          </div>
+          <div onclick="copyText('president-address')">
+            <strong>Adresse :</strong> <span id="president-address">Maison des Associations
+30 route de Claviès, 46 100 LISSAC ET MOURET</span>
+        </div>
+        <div class="horaire">
+          <strong>Horaire :</strong> <span>Lundi, Mardi, Jeudi et Vendredi de 14 h à 16 h 30</span>
+          <p><strong>(fermé pendant les vacances scolaires, samedi et dimanche)</strong></p>
+        </div>
+      </div>
+    </section>
+
+    <h2>Documents</h2>
+    <ul class="pdf-list">
+      <li><a href="pdf.html?file=statuts.pdf">📄 Statuts de l'association</a></li>
+      <li><a href="pdf.html?file=REGLEMENT INTERIEUR EVS.pdf">📄 Règlement intérieur EVS</a></li>
+      <li><a href="pdf.html?file=REGLEMENT INTERIEUR ALSH PERISCOLAIRE ET EXTRASCOLAIRE.pdf">📄 Règlement intérieur ALSH Périscolaire et Extrascolaire</a></li>
+      <li><a href="pdf.html?file=Fiche d'inscription activité EVS 2025-2026.pdf">📄 Fiche D'inscription activité EVS</a></li>
+      <li><a href="pdf.html?file=Fiche d'adhésion 2024-2025.pdf">📄 Fiche d'adhésion 2024-2025</a></li>
+    </ul>
+  </main>
+
+  <script src="script/contact.js"></script>
+</body>
+</html>

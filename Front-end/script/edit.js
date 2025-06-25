@@ -48,6 +48,32 @@ function createField(labelText, typeInput, name, value = '') {
   return wrapper;
 }
 
+function createCategorySelect(labelText, name, selectedValue = '') {
+  const wrapper = document.createElement('div');
+
+  const label = document.createElement('label');
+  label.htmlFor = name;
+  label.textContent = labelText;
+
+  const select = document.createElement('select');
+  select.id = name;
+  select.name = name;
+
+  const categories = ['3-6 ans', '6-12 ans', '12-18 ans', 'periscolaire'];
+  categories.forEach(cat => {
+    const option = document.createElement('option');
+    option.value = cat;
+    option.textContent = cat;
+    if (cat === selectedValue) option.selected = true;
+    select.appendChild(option);
+  });
+
+  wrapper.appendChild(label);
+  wrapper.appendChild(select);
+  return wrapper;
+}
+
+
 function createSelectField(labelText, name, selectedValue = '') {
   const wrapper = document.createElement('div');
 
@@ -98,6 +124,7 @@ async function loadData() {
     if (type === 'article') {
       form.appendChild(createField('Titre', 'text', 'Title', data.Title));
       form.appendChild(createField('Description', 'textarea', 'description', data.description));
+      form.appendChild(createCategorySelect('Catégorie', 'categorie', data.categorie || ''));
     } else if (type === 'event') {
       form.appendChild(createField('Titre', 'text', 'Title', data.title));
       form.appendChild(createField('Date', 'date', 'date', data.date ? data.date.slice(0, 10) : ''));
