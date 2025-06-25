@@ -31,7 +31,9 @@ exports.create_agenda = (req, res) => {
     description: req.body.description,
     creator: req.userId,
     day: req.body.day,
-    price: req.body.price
+    price: req.body.price,
+    host: req.body.host,
+    hours: req.body.hours
   })
 
   console.log(newAgenda)
@@ -53,7 +55,9 @@ exports.update_agenda = (req, res) => {
                 Title: req.body.Title,
                 description: req.body.description,
                 day: req.body.day,
-                price: req.body.price
+                price: req.body.price,
+                host: req.body.host,
+                hours: req.body.hours
             }})
             .then(() => res.status(201).json({ message: 'agenda update !' }))
             .catch(error => res.status(400).json({ error }));
