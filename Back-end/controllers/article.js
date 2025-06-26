@@ -31,6 +31,7 @@ exports.get_OneArticleAdmin = (req, res) => {
 
 exports.create_article = (req, res) => {
   imageUrl = `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`;
+  console.log(req.body)
 
   const newArticle = new article({
     Title: req.body.Title,
@@ -57,6 +58,16 @@ exports.update_article = (req, res) => {
       if (post.creator[0] == req.userId || req.userRole == "admin") {
         if (req.file) {
           imageUrl = `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`;
+        if (post.picture) {
+              const filename = post.picture.split('/uploads/')[1];
+              const imagePath = path.join(__dirname, '..', 'uploads', filename);
+
+              fs.unlink(imagePath, (err) => {
+                if (err) {
+                  console.error('erreur de supression:', err);
+                }
+              });
+            }
         }
         else {
           imageUrl = post.picture;
@@ -68,20 +79,7 @@ exports.update_article = (req, res) => {
           picture: imageUrl,
           categorie: req.body.categorie
         }})
-        .then(() => {
-          if (post.picture) {
-              const filename = post.picture.split('/uploads/')[1];
-              const imagePath = path.join(__dirname, '..', 'uploads', filename);
-
-              fs.unlink(imagePath, (err) => {
-                if (err) {
-                  console.error('erreur de supression:', err);
-                }
-              });
-            }
-
-          res.status(201).json({ message: 'article update !' })
-        })
+        .then(() => res.status(201).json({ message: 'article update !' }))
         .catch(error => res.status(400).json({ error }));
       } 
       else {
@@ -120,5 +118,5 @@ exports.delete_article = async (req, res) => {
         return res.status(403).json({ message: "Vous n'avez pas le droit de supprimer cet article" });
       }
     })
-    .catch(error => res.status(400).json({ message: "Article non trouvé" }));
+    .catch(() => res.status(400).json({ message: "Article non trouvé" }));
 };
