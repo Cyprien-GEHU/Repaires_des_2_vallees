@@ -20,13 +20,13 @@ router.get('/events/:id', authToken, eventControl.get_OneEventAdmin);
 //Router POST
 router.post('/user', authToken, userControl.create_user)
 router.post('/article', authToken, upload.single('image'), articleControl.create_article);
-router.post('/agenda', authToken, agendaControl.create_agenda);
+router.post('/agenda', authToken, upload.none(), agendaControl.create_agenda);
 router.post('/event', authToken, upload.single('image'), eventControl.create_event);
 
 //Router PUT
 router.put('/user/:id', authToken, userControl.update_user);
 router.put('/article/:id', authToken, upload.single('image'), articleControl.update_article);
-router.put('/agenda/:id', authToken, agendaControl.update_agenda);
+router.put('/agenda/:id', authToken, upload.none(), agendaControl.update_agenda);
 router.put('/event/:id', authToken, upload.single('image'), eventControl.update_event);
 
 //Router DELETE
