@@ -26,6 +26,7 @@ exports.get_OneAgendaAdmin = (req, res) => {
 }
 
 exports.create_agenda = (req, res) => {
+  console.log(req)
   const newAgenda = new agenda({
     Title: req.body.Title,
     description: req.body.description,

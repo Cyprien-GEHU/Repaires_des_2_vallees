@@ -108,10 +108,12 @@ if (type === 'article') {
   form.appendChild(createField('Date', 'date', 'day'));
   form.appendChild(createField('Description', 'textarea', 'description'));
   form.appendChild(createField('Catégorie', 'text', 'categorie'));
+  form.appendChild(createField('Heure', 'time', 'hours'));
+  form.appendChild(createField('Hôte', 'text', 'host'));
 } else if (type === 'agenda') {
   form.appendChild(createField('Événement', 'text', 'Title'));
   form.appendChild(createField('Price', 'number', 'price'));
-  form.appendChild(createDaySelect('Jour de la semaine', 'day'));
+  form.appendChild(createDaySelect('Jour de la semaine','text', 'day'));
 } else {
   form.innerHTML = '<p class="error-message">Type invalide.</p>';
   throw new Error('Type invalide');
@@ -146,11 +148,7 @@ form.addEventListener('submit', async e => {
   const token = getCookie('token');
   const imageFile = document.getElementById('image')?.files[0];
   const formData = new FormData(form);
-
-  // Si pas d'image, supprimer le champ vide
-  if (!imageFile) {
-    formData.delete('image');
-  }
+ 
 
   try {
     const options = {
@@ -170,7 +168,7 @@ form.addEventListener('submit', async e => {
     }
 
     alert('Création réussie !');
-    //window.location.href = `manage.html?type=${typePlural}`;
+    window.location.href = `manage.html?type=${typePlural}`;
   } catch (err) {
     console.error(err);
     alert('Erreur réseau lors de la création.');
