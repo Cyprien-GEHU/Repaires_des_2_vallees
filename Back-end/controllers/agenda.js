@@ -26,7 +26,6 @@ exports.get_OneAgendaAdmin = (req, res) => {
 }
 
 exports.create_agenda = (req, res) => {
-  console.log(req)
   const newAgenda = new agenda({
     Title: req.body.Title,
     description: req.body.description,
@@ -40,7 +39,7 @@ exports.create_agenda = (req, res) => {
   console.log(newAgenda)
   newAgenda.save()
     .then(() => res.status(201).json({ message: 'agenda créé !' }))
-    .catch(error => res.status(400).json({ message: "création impossible" }));
+    .catch(error => res.status(400).json({ message: "création impossible: " + error }));
 }
 
 exports.update_agenda = (req, res) => {

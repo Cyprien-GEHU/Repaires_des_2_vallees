@@ -18,12 +18,12 @@ document.addEventListener("DOMContentLoaded", () => {
       const html = `
         <div class="card-horizontal">
           <div class="card-body">
+          <p><stong></strong> ${article.picture ? `<img src="${article.picture}" alt="Image de l'article" />` : 'Aucune image'}</p>
             <h2>${article.Title || ''}</h2>
             <p>${article.description || ''}</p>
             <div>${article.contenu || ''}</div>
-            ${article.categorie ? `<p style='margin-top:1rem;'><strong>Catégorie :</strong> ${article.categorie}</p>` : ''}
-            ${article.day ? `<p><strong>Date :</strong> ${article.day}</p>` : ''}
-            ${article.price ? `<p><strong>Prix :</strong> ${article.price} €</p>` : ''}
+            <p style='margin-top:1rem;'><strong>Catégorie :</strong> ${article.categorie}</p>
+            
           </div>
         </div>
       `;

@@ -85,7 +85,7 @@ function createDaySelect(labelText, name) {
   select.name = name;
   select.id = name;
 
-  const jours = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi'];
+  const jours = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi'];
   jours.forEach(jour => {
     const option = document.createElement('option');
     option.value = jour;
@@ -102,18 +102,18 @@ function createDaySelect(labelText, name) {
 if (type === 'article') {
   form.appendChild(createField('Titre', 'text', 'Title'));
   form.appendChild(createField('Description', 'textarea', 'description'));
-  form.appendChild(createField('Catégorie', 'text', 'categorie'));
+  form.appendChild(createCategorySelect('Catégorie', 'categorie'));
 } else if (type === 'event') {
   form.appendChild(createField('Titre', 'text', 'Title'));
   form.appendChild(createField('Date', 'date', 'day'));
   form.appendChild(createField('Description', 'textarea', 'description'));
-  form.appendChild(createField('Catégorie', 'text', 'categorie'));
+} else if (type === 'agenda') {
+  form.appendChild(createField('Activité', 'text', 'Title'));
+  form.appendChild(createField('Price', 'number', 'price'));
+  form.appendChild(createDaySelect('Jour de la semaine', 'day'));
   form.appendChild(createField('Heure', 'time', 'hours'));
   form.appendChild(createField('Hôte', 'text', 'host'));
-} else if (type === 'agenda') {
-  form.appendChild(createField('Événement', 'text', 'Title'));
-  form.appendChild(createField('Price', 'number', 'price'));
-  form.appendChild(createDaySelect('Jour de la semaine','text', 'day'));
+  form.appendChild(createField('Description', 'textarea', 'description'));
 } else {
   form.innerHTML = '<p class="error-message">Type invalide.</p>';
   throw new Error('Type invalide');

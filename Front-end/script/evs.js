@@ -59,16 +59,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
           const titre = document.createElement("h4");
           titre.textContent = act.Title;
-
+          
           const description = document.createElement("p");
           description.textContent = act.description || "Aucune description disponible.";
 
           const prix = document.createElement("p");
           prix.textContent = `Prix : ${act.price || "non renseigné"}`;
 
+          const host = document.createElement("p");
+          host.textContent = `Hôte : ${act.host || "non renseigné"}`;
+
+          const hours = document.createElement("p");
+          hours.textContent = `Heure : ${act.hours || "non renseignée"}`;
+
           card.appendChild(titre);
           card.appendChild(description);
           card.appendChild(prix);
+          card.appendChild(host);
+          card.appendChild(hours);
 
           cardsContainer.appendChild(card);
         });

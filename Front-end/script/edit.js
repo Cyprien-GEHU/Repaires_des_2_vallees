@@ -126,12 +126,14 @@ async function loadData() {
       form.appendChild(createField('Description', 'textarea', 'description', data.description));
       form.appendChild(createCategorySelect('Catégorie', 'categorie', data.categorie || ''));
     } else if (type === 'event') {
-      form.appendChild(createField('Titre', 'text', 'Title', data.title));
-      form.appendChild(createField('Date', 'date', 'date', data.date ? data.date.slice(0, 10) : ''));
+      form.appendChild(createField('Titre', 'text', 'Title', data.Title));
+      form.appendChild(createField('Date', 'date', 'day', data.day ? data.day.slice(0, 10) : ''));
       form.appendChild(createField('Description', 'textarea', 'description', data.description || ''));
+      form.appendChild(createField('Catégorie', 'text', 'categorie', data.categorie || ''));
     } else if (type === 'agenda') {
       form.appendChild(createField('Événement', 'text', 'Title', data.Title));
-      form.appendChild(createSelectField('Jour', 'day', data.day));
+      form.appendChild(createField('Price', 'number', 'price', data.price || ''));
+      form.appendChild(createSelectField('Jour de la semaine', 'day', data.day));
     }
 
     // ➕ Champ image pour article et event

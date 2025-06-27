@@ -43,20 +43,20 @@ document.addEventListener("DOMContentLoaded", () => {
         bloc.appendChild(titre);
 
         const cardContainer = document.createElement("div");
-        cardContainer.className = "card-container"; // Ajoute un conteneur optionnel
+        cardContainer.className = "card-container";
 
         evts.forEach(evt => {
           const card = document.createElement("div");
           card.className = "card";
 
           card.innerHTML = `
-  ${evt.picture ? `<img src="${evt.picture}" alt="${evt.Title}">` : ""}
-  <div class="card-body">
-    <h2>${evt.Title}</h2>
-    <p class="truncate">${evt.description}</p>
-  </div>
-`;
-
+            ${evt.picture ? `<img src="${evt.picture}" alt="${evt.Title}">` : ""}
+            <div class="card-body">
+              <h2>${evt.Title}</h2>
+              <p class="truncate">${evt.description}</p>
+              
+            </div>
+          `;
 
           cardContainer.appendChild(card);
         });
