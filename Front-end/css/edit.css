@@ -1,0 +1,149 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: white;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: white;
+  border-bottom: 2px solid green;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+}
+
+header img {
+  height: 60px;
+}
+
+header h1 {
+  font-size: 28px;
+  font-weight: bold;
+  text-align: center;
+  flex-grow: 1;
+}
+
+.btns a {
+  background: #43a047;
+  color: white;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: background 0.3s;
+}
+
+.btns a:hover {
+  background: #2e7d32;
+}
+
+main {
+  padding: 30px;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+label {
+  font-weight: bold;
+}
+
+input[type="text"],
+input[type="date"],
+textarea {
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #999;
+  font-size: 16px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+button {
+  background-color: #43a047;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 20px;
+}
+
+button:hover {
+  background-color: #2e7d32;
+}
+
+#edit-form {
+  max-width: 600px;
+  margin: 2rem auto;
+  background: #ffffff;
+  padding: 2rem;
+  border: 2px solid #43a047;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+#edit-form div {
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+#edit-form label {
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  color: #2e7d32;
+}
+
+#edit-form input,
+#edit-form textarea,
+#edit-form select {
+  padding: 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  background: #f9f9f9;
+  transition: border 0.3s ease;
+}
+
+#edit-form input:focus,
+#edit-form textarea:focus,
+#edit-form select:focus {
+  border-color: #43a047;
+  outline: none;
+}
+
+#edit-form button {
+  background: #43a047;
+  color: white;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+#edit-form button:hover {
+  background: #2e7d32;
+}
+
+.error-message {
+  color: red;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 2rem;
+}

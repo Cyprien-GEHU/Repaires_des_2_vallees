@@ -1,0 +1,45 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+}
+
+header {
+  background-color: #43a047;
+  color: white;
+  padding: 10px 10px;
+  text-align: center;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.viewer-container {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 60px);
+}
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #eff1f0;
+  color: rgb(7, 2, 2);
+  padding: 10px 20px;
+}
+
+.toolbar a {
+  color: rgb(2, 2, 2);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.toolbar a:hover {
+  text-decoration: underline;
+}
+
+iframe#pdf-frame {
+  flex: 1;
+  width: 100%;
+  border: none;
+}
