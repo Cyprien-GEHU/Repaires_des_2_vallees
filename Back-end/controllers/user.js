@@ -1,89 +1,88 @@
-const user = require('../models/user')
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+const user = require('../models/user');
 
 exports.getAllUser = (req, res) => {
   article.find()
-    .then(post => {res.status(200).json(post)})
-    .catch(error => res.status(400).json({ error }));
-}
+    .then((post) => { res.status(200).json(post); })
+    .catch((error) => res.status(400).json({ error }));
+};
 
 exports.getOneUser = (req, res) => {
-  const url = req.url;
-  const split = url.split("/");
+  const { url } = req;
+  const split = url.split('/');
   const id = split[1];
 
-  article.findOne({_id: id})
-    .then(post => {res.status(200).json(post)})
-    .catch(error => res.status(400).json({ error }));
-}
+  article.findOne({ _id: id })
+    .then((post) => { res.status(200).json(post); })
+    .catch((error) => res.status(400).json({ error }));
+};
 exports.get_OneUserAdmin = (req, res) => {
-  const url = req.url;
-  const split = url.split("/");
+  const { url } = req;
+  const split = url.split('/');
   const id = split[2];
 
-  article.findOne({_id: id})
-    .then(post => {res.status(200).json(post)})
-    .catch(error => res.status(400).json({ error }));
-}
+  article.findOne({ _id: id })
+    .then((post) => { res.status(200).json(post); })
+    .catch((error) => res.status(400).json({ error }));
+};
 
 exports.create_user = (req, res) => {
   bcrypt.hash(req.body.password, 3, (err, password) => {
     if (err) {
-              // Handle error
-              return;
+      // Handle error
+      return;
     }
     const newuser = new user({
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       email: req.body.email,
-      password: password,
+      password,
       address: req.body.address,
-      phone: req.body.phone
-    })
-    console.log(newuser)
+      phone: req.body.phone,
+    });
+    console.log(newuser);
     newuser.save()
       .then(() => res.status(201).json({ message: 'user créé !' }))
-      .catch(error => res.status(400).json({ error }));
-   });
-}
+      .catch((error) => res.status(400).json({ error }));
+  });
+};
 
 exports.update_user = (req, res) => {
-  const url = req.url;
-  const split = url.split("/");
+  const { url } = req;
+  const split = url.split('/');
   const id = split[2];
 
   bcrypt.hash(req.body.password, 3, (err, password) => {
     if (err) {
-              // Handle error
-              return;
+      // Handle error
+      return;
     }
-    user.updateOne({ _id: id }, { 
+    user.updateOne({ _id: id }, {
       $set: {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         email: req.body.email,
-        password: password,
+        password,
         address: req.body.address,
-        phone: req.body.phone
-    }})
-    .then(() => res.status(201).json({ message: 'user update !' }))
-    .catch(error => res.status(400).json({ error }));
-   });
-}
+        phone: req.body.phone,
+      },
+    })
+      .then(() => res.status(201).json({ message: 'user update !' }))
+      .catch((error) => res.status(400).json({ error }));
+  });
+};
 
 exports.delete_user = (req, res) => {
-  const url = req.url;
-  const split = url.split("/");
+  const { url } = req;
+  const split = url.split('/');
   const id = split[2];
-  
-  if (req.userRole == "admin" || req.userRole == "animator") {
-    user.deleteOne({_id: id})
+
+  if (req.userRole == 'admin' || req.userRole == 'animator') {
+    user.deleteOne({ _id: id })
       .then(() => res.status(201).json({ message: 'user delete !' }))
-      .catch(error => res.status(400).json({ error }));
+      .catch((error) => res.status(400).json({ error }));
+  } else {
+    return res.status(501).json({ message: 'you are not a admin, so you can delete this account' });
   }
-  
-  else {
-    return res.status(501).json({message: "you are not a admin, so you can delete this account"})
-  }
-}
+};

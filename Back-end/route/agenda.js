@@ -1,5 +1,6 @@
-const agendaControl = require('../controllers/agenda')
 const express = require('express');
+const agendaControl = require('../controllers/agenda');
+
 const router = express.Router();
 
 // GET all activity on agenda
