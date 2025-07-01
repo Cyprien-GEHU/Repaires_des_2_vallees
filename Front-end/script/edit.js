@@ -85,7 +85,7 @@ function createSelectField(labelText, name, selectedValue = '') {
   select.id = name;
   select.name = name;
 
-  const days = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi'];
+  const days = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi'];
   days.forEach(day => {
     const option = document.createElement('option');
     option.value = day;
@@ -129,10 +129,10 @@ async function loadData() {
       form.appendChild(createField('Titre', 'text', 'Title', data.Title));
       form.appendChild(createField('Date', 'date', 'day', data.day ? data.day.slice(0, 10) : ''));
       form.appendChild(createField('Description', 'textarea', 'description', data.description || ''));
-      form.appendChild(createField('Catégorie', 'text', 'categorie', data.categorie || ''));
     } else if (type === 'agenda') {
       form.appendChild(createField('Événement', 'text', 'Title', data.Title));
       form.appendChild(createField('Price', 'number', 'price', data.price || ''));
+      form.appendChild(createField('Description', 'textarea', 'description', data.description || ''));
       form.appendChild(createSelectField('Jour de la semaine', 'day', data.day));
     }
 

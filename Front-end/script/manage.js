@@ -44,7 +44,7 @@ function createItemElement(item) {
   } else if (type === 'events') {
     innerHTML = `
       <h3>${item.Title}</h3>
-      <p><strong>Date :</strong> ${new Date(item.date).toLocaleDateString()}</p>
+      <p><strong>Date :</strong> ${new Date(item.day).toLocaleDateString()}</p>
       <p>${item.description || ''}</p>
       <p><strong>ID :</strong> ${item._id}</p>
     `;
