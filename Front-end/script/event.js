@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <div class="card-body">
               <h2>${evt.Title}</h2>
               <p class="truncate">${evt.description}</p>
-              
+              <a href="gestion.html?type=event&id=${evt._id}" class="read-more-btn" style="margin-top:10px;display:inline-block;background:#00cc00;color:white;padding:8px 16px;border-radius:6px;text-decoration:none;transition:background 0.3s;">Lire plus</a>
             </div>
           `;
 

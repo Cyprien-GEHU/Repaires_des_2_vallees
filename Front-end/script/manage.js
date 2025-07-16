@@ -52,6 +52,8 @@ function createItemElement(item) {
     innerHTML = `
       <h3>${item.Title}</h3>
       <p><strong>Date :</strong> ${item.day}</p>
+      <p><strong>Description :</strong> ${item.description || 'Aucune description'}</p>
+      <p><strong>prix :</strong> ${item.price || 'Gratuit'}</p>
       <p><strong>ID :</strong> ${item._id}</p>
     `;
   }
